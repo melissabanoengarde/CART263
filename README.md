@@ -1,2 +1,2 @@
 # CART263
-Course repository for CART263-A.
+Course repository for CART263-A 🧃
