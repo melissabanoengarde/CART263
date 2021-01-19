@@ -2,11 +2,11 @@
 
 /*****************
 
-Title of Project
-Author Name
+W2: Review
+Melissa Banoen-Garde
 
-This is a template. You must fill in the title,
-author, and this description to match your project!
+Going over constants, object parameters,
+and first-class function.
 
 ******************/
 
