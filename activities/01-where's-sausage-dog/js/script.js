@@ -2,11 +2,10 @@
 
 /*****************
 
-Title of Project
-Author Name
+Activity 01: Where's Sausage Dog?
+Melissa Banoen-Garde
 
-This is a template. You must fill in the title,
-author, and this description to match your project!
+Player has to click on the sausage dog to win the game.
 
 ******************/
 
