@@ -23,7 +23,7 @@ let animals = [];
 function preload() {
   // for-loop that counts up to the number of animal images, puts that loaded image into our array
   for (let i = 0; i < NUM_ANIMAL_IMGS; i++) {
-    let animalImage = loadImagine(`assets/images/animal${i}.png`);
+    let animalImage = loadImage(`assets/images/animal${i}.png`);
     animalImgs.push(animalImage);
   }
 }
@@ -34,11 +34,13 @@ function preload() {
 function setup() {
   createCanvas(windowWidth, windowHeight);
 
+  // create the animals
   for (let i = 0; i < NUM_ANIMALS_DISPLAYED; i++) {
-    let x=random(0,width);
-    let y = random(0,height);
-    let animalImage = random(animalImages); // randomizes one of the 10 images
-    let animal = new Animal(x,y,image);
+    let x = random(0, width);
+    let y = random(0, height);
+    let animalImage = random(animalImgs); // randomizes one of the 10 images
+
+    let animal = new Animal(x, y, animalImage);
     animals.push(animal);
   }
 }
@@ -47,5 +49,10 @@ function setup() {
 // draw()
 // Description of draw()
 function draw() {
-  background(255);
+  background(255, 255,0);
+
+  for (let i = 0; i < animals.length; i++) {
+    // NEW NEW
+    animals[i].update();
+  }
 }
