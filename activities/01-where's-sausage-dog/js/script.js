@@ -21,13 +21,17 @@ let animals = [];
 let sausageDogImg = undefined;
 let sausageDog = undefined;
 
+// global constant for path and prefix of the animal images
+const ANIMAL_IMGS_PATH = `assets/images/animal`;
+
 
 // preload()
 // Description of preload
 function preload() {
   // for-loop that counts up to the number of animal images, puts that loaded image into our array
   for (let i = 0; i < NUM_ANIMAL_IMGS; i++) {
-    let animalImage = loadImage(`assets/images/animal${i}.png`);
+    // NEW NEW
+    let animalImage = loadImage(ANIMAL_IMGS_PATH + `${i}.png`);
     animalImgs.push(animalImage);
   }
 
