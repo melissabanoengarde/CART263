@@ -26,12 +26,7 @@ class SausageDog extends Animal{
   // establishes the constraints of the sausage dog's image's clickability (? can't formulate a sentence)
   // if the mouse is clicked inside the sausage dog image, the found property is set to "true"
   mousePressed() {
-    if (mouseX > this.x - this.image.width/2 &&
-        mouseX < this.x + this.image.width/2 &&
-        mouseY > this.y - this.image.height/2 &&
-        mouseY < this.y + this.image.height/2) {
-          this.found = true;
-    }
+    super.overlap();
   }
 
 }
