@@ -17,6 +17,10 @@ const NUM_ANIMALS_DISPLAYED = 100;
 let animalImgs = [];
 let animals = [];
 
+// global variable for sausage dog
+let sausageDogImg = undefined;
+let sausageDog = undefined;
+
 
 // preload()
 // Description of preload
@@ -26,6 +30,9 @@ function preload() {
     let animalImage = loadImage(`assets/images/animal${i}.png`);
     animalImgs.push(animalImage);
   }
+
+  // sausage dog image
+  sausageDogImg = loadImage(`assets/images/sausage-dog.png`);
 }
 
 
@@ -43,16 +50,28 @@ function setup() {
     let animal = new Animal(x, y, animalImage);
     animals.push(animal);
   }
+
+  // create sausage dog
+  let x = random(0, width);
+  let y = random(0, height);
+  sausageDog = new SausageDog(x, y, sausageDogImg);
 }
 
 
 // draw()
 // Description of draw()
 function draw() {
-  background(255, 255,0);
+  background(255, 255, 0);
 
   for (let i = 0; i < animals.length; i++) {
     // NEW NEW
     animals[i].update();
   }
+
+  // displaying sausage Dog
+  sausageDog.update();
+}
+
+function mousePressed() {
+  sausageDog.mousePressed();
 }
