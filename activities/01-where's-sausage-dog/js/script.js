@@ -55,7 +55,7 @@ function setup() {
 // draw()
 // Description of draw()
 function draw() {
-  background(255, 255, 0);
+  background(255);
 
   updateAnimals();
   updateSausageDog();
