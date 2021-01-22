@@ -11,15 +11,15 @@ class Animal {
   }
 
   update() {
-    this.display;
+    this.display();
   }
 
   display() {
     push();
     imageMode(CENTER);
-    translate(this.x,this.y);
+    translate(this.x, this.y);
     rotate(this.angle);
-    image(this.image);
+    image(this.image, 0, 0);
     pop();
   }
 
