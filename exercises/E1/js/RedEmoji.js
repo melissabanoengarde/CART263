@@ -1,7 +1,7 @@
-// Sausage Dog
-// subclass of super class Animal.js
+// Heartbreak Emoji
+// subclass of super class Emoji.js
 
-class SausageDog extends Animal {
+class RedEmoji extends Emoji {
 
   constructor(x, y, image) {
 
