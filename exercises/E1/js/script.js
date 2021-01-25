@@ -11,36 +11,36 @@ Player has to click given emoji.
 
 ******************/
 
-// declaring global constant for the number of animal images and the number of animals to display
-const NUM_ANIMAL_IMGS = 7;
-const NUM_ANIMALS_DISPLAYED = 250;
+// declaring global constant for the number of redEmoji images and the number of redEmojis to display
+const NUM_RED_EMOJI_IMGS = 7;
+const NUM_RED_EMOJIS = 250;
 
-// declaring global arrays for the animal images and animal objects
-let animalImgs = [];
-let animals = [];
+// declaring global arrays for the redEmoji images and redEmoji objects
+let redEmojiImgs = [];
+let redEmojis = [];
 
 // global variable for sausage dog
-let sausageDogImg = undefined;
-let sausageDog = undefined;
+let heartbreakEmojiImg = undefined;
+let heartbreakEmoji = undefined;
 
-// global constant for path and prefix of the animal images and sausage dog
-const ANIMAL_IMGS_PATH = `assets/images/red/red`;
-const SAUSAGED_DOG_IMG_PATH = `assets/images/red/heartbreak.png`;
+// global constant for path and prefix of the redEmoji images and sausage dog
+const RED_EMOJI_IMGS_PATH = `assets/images/red/red`;
+const HEARTBREAK_EMOJI_IMG_PATH = `assets/images/red/heartbreak.png`;
 // global constant for
 
 
 // preload()
 // Description of preload
 function preload() {
-  // for-loop that counts up to the number of animal images, puts that loaded image into our array
-  for (let i = 0; i < NUM_ANIMAL_IMGS; i++) {
+  // for-loop that counts up to the number of redEmoji images, puts that loaded image into our array
+  for (let i = 0; i < NUM_RED_EMOJI_IMGS; i++) {
     // NEW NEW
-    let animalImage = loadImage(ANIMAL_IMGS_PATH + `${i}.png`);
-    animalImgs.push(animalImage);
+    let redEmojiImg = loadImage(RED_EMOJI_IMGS_PATH + `${i}.png`);
+    redEmojiImgs.push(redEmojiImg);
   }
 
   // sausage dog image
-  sausageDogImg = loadImage(SAUSAGED_DOG_IMG_PATH);
+  heartbreakEmojiImg = loadImage(HEARTBREAK_EMOJI_IMG_PATH);
 }
 
 
@@ -49,8 +49,8 @@ function preload() {
 function setup() {
   createCanvas(windowWidth, windowHeight);
 
-  createAnimals();
-  createSausageDog();
+  createRedEmojis();
+  createHeartbreakEmoji();
 }
 
 
@@ -59,49 +59,49 @@ function setup() {
 function draw() {
   background(217, 43, 43);
 
-  updateAnimals();
-  updateSausageDog();
+  updateRedEmojis();
+  updateHeartbreakEmoji();
 }
 
 function mousePressed() {
-  sausageDog.mousePressed();
+  heartbreakEmoji.mousePressed();
 }
 
-// function that creates the animals
-function createAnimals() {
-  for (let i = 0; i < NUM_ANIMALS_DISPLAYED; i++) {
-    createRandomAnimals();
+// function that creates the redEmojis
+function createRedEmojis() {
+  for (let i = 0; i < NUM_RED_EMOJIS; i++) {
+    createRandomRedEmojis();
   }
 }
 
-// function that creates specific random animals
-function createRandomAnimals() {
+// function that creates specific random redEmojis
+function createRandomRedEmojis() {
   let x = random(0, width);
   let y = random(0, height);
-  let animalImage = random(animalImgs); // randomizes one of the 10 images
+  let redEmojiImg = random(redEmojiImgs); // randomizes one of the 10 images
 
-  let animal = new Emoji(x, y, animalImage);
-  animals.push(animal);
+  let redEmoji = new Emoji(x, y, redEmojiImg);
+  redEmojis.push(redEmoji);
 }
 
 // function that creates the sausage Dog
-function createSausageDog() {
+function createHeartbreakEmoji() {
   // create sausage dog
   let x = random(0, width);
   let y = random(0, height);
-  sausageDog = new RedEmoji(x, y, sausageDogImg);
+  heartbreakEmoji = new RedEmoji(x, y, heartbreakEmojiImg);
 }
 
-// function that draws random animals
-function updateAnimals() {
-  for (let i = 0; i < animals.length; i++) {
+// function that draws random redEmojis
+function updateRedEmojis() {
+  for (let i = 0; i < redEmojis.length; i++) {
     // NEW NEW
-    animals[i].update();
+    redEmojis[i].update();
   }
 }
 
 // updates code of sausage Dog
-function updateSausageDog() {
+function updateHeartbreakEmoji() {
   // displaying sausage Dog
-  sausageDog.update();
+  heartbreakEmoji.update();
 }
