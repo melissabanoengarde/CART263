@@ -1,25 +1,31 @@
-// Sausage Dog
-// subclass of super class Animal.js
+// Heartbreak Emoji
+// subclass of super class Emoji.js
 
-class SausageDog extends Animal {
+class Red extends Emoji {
 
   constructor(x, y, image) {
 
     // call superclass constructor
     super(x, y, image);
 
+    this.info = `Find the broken-heart emoji`;
     // tracking finding
     this.found = false;
     this.rotationSpeed = 0.25;
   }
 
+
   // when the sausge dog is found, it spins
   update() {
     super.update();
 
+
     if (this.found) {
       // we can use this.angle because it is inherited from the superclass
       this.angle += this.rotationSpeed;
+
+      this.image.width += 1;
+      this.image.height += 1;
     }
   }
 

@@ -13,9 +13,7 @@ Player has to click given emoji.
 
 // variables for our states/levels
 let state = `title`;
-let levelRed1;
-let levelOrange2;
-let levelYellow3;
+let title;
 
 // declaring global constant for the number of redEmoji images and the number of redEmojis to display
 const NUM_RED_EMOJI_IMGS = 7;
@@ -25,14 +23,13 @@ const NUM_RED_EMOJIS = 250;
 let redEmojiImgs = [];
 let redEmojis = [];
 
-// global variable for sausage dog
+// global variable for heartbreka Emoji
 let heartbreakEmojiImg = undefined;
 let heartbreakEmoji = undefined;
 
 // global constant for path and prefix of the redEmoji images and sausage dog
 const RED_EMOJI_IMGS_PATH = `assets/images/red/red`;
 const HEARTBREAK_EMOJI_IMG_PATH = `assets/images/red/heartbreak.png`;
-// global constant for
 
 
 // preload()
@@ -56,7 +53,21 @@ function preload() {
 function setup() {
   createCanvas(windowWidth, windowHeight);
 
-  // creates red emojis
+  initializeStates();
+  initializeEmojis();
+}
+
+function initializeStates() {
+  title = new Title();
+
+  // Level 1: find heartbreak emoji
+  let x = random(0, width);
+  let y = random(0, height);
+  heartbreakEmoji = new Red(x, y, heartbreakEmojiImg);
+}
+
+function initializeEmojis() {
+  // Level 1
   for (let i = 0; i < NUM_RED_EMOJIS; i++) {
     let x = random(0, width);
     let y = random(0, height);
@@ -65,11 +76,6 @@ function setup() {
     let redEmoji = new Emoji(x, y, redEmojiImg);
     redEmojis.push(redEmoji);
   }
-
-  // create sausage dog
-  let x = random(0, width);
-  let y = random(0, height);
-  heartbreakEmoji = new LvlRed1(x, y, heartbreakEmojiImg);
 }
 
 
@@ -78,6 +84,18 @@ function setup() {
 function draw() {
   background(217, 43, 43);
 
+  if (state === `title`) {
+    titlePage();
+  } else if (state === `simulation`) {
+    simulation();
+  }
+}
+
+function titlePage() {
+  title.display();
+}
+
+function simulation() {
   // draws random red emojis
   for (let i = 0; i < redEmojis.length; i++) {
     // NEW NEW
@@ -86,9 +104,14 @@ function draw() {
   // updaets heartbreak emoji
   // displaying sausage Dog
   heartbreakEmoji.update();
-
 }
 
 function mousePressed() {
   heartbreakEmoji.mousePressed();
+}
+
+function keyPressed() {
+  if (keyIsDown(13) && state === `title`) {
+    state = `simulation`;
+  }
 }

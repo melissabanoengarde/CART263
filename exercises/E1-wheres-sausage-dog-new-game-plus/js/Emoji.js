@@ -50,6 +50,7 @@ class Emoji {
       mouseY > this.y - this.image.height / 2 &&
       mouseY < this.y + this.image.height / 2) {
       this.found = true;
+      state = `endPage`;
     }
   }
 
