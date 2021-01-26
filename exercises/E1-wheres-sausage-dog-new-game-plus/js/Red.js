@@ -9,30 +9,40 @@ class Red extends Emoji {
     super(x, y, image);
 
     this.info = `Find the broken-heart emoji`;
+
     // tracking finding
     this.found = false;
     this.rotationSpeed = 0.25;
   }
 
-
-  // when the sausge dog is found, it spins
+  // when the heartbreak emoji is found, it spins and zooms
   update() {
     super.update();
-
-
+    // if the heartbreak emoji is found...
     if (this.found) {
-      // we can use this.angle because it is inherited from the superclass
+      // image rotates
       this.angle += this.rotationSpeed;
 
+      // image size increases
       this.image.width += 1;
       this.image.height += 1;
     }
   }
 
-  // establishes the constraints of the sausage dog's image's clickability (? can't formulate a sentence)
-  // if the mouse is clicked inside the sausage dog image, the found property is set to "true"
+  // switches state to the "end" page
+  ending() {
+    state = `endPage`;
+  }
+
   mousePressed() {
-    super.overlap();
+    // defining the overlap method's parameters
+    const clicked = this.overlap(mouseX, mouseY);
+    // if the heartbreak emoji is clicked, its found property changes to "true"
+    if (clicked === true){
+      this.found = true;
+      // allows found emoji to spin and zoom for 3 seconds before switching to the end page
+      setTimeout(this.ending, 3000);
+    }
   }
 
 }

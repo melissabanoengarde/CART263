@@ -61,23 +61,23 @@ function setup() {
 function initializeStates() {
   title = new Title();
   end = new End();
-
-  // Level 1: find heartbreak emoji
-  let x = random(0, width);
-  let y = random(0, height);
-  heartbreakEmoji = new Red(x, y, heartbreakEmojiImg);
 }
 
 function initializeEmojis() {
-  // Level 1
+  // creates the red emojis 
   for (let i = 0; i < NUM_RED_EMOJIS; i++) {
     let x = random(0, width);
     let y = random(0, height);
-    let redEmojiImg = random(redEmojiImgs); // randomizes one of the 10 images
+    let redEmojiImg = random(redEmojiImgs); // randomizes one of the 7 images
 
     let redEmoji = new Emoji(x, y, redEmojiImg);
     redEmojis.push(redEmoji);
   }
+
+  // find heartbreak emoji
+  let x = random(0, width);
+  let y = random(0, height);
+  heartbreakEmoji = new Red(x, y, heartbreakEmojiImg);
 }
 
 
@@ -102,11 +102,9 @@ function titlePage() {
 function simulation() {
   // draws random red emojis
   for (let i = 0; i < redEmojis.length; i++) {
-    // NEW NEW
     redEmojis[i].update();
   }
   // updaets heartbreak emoji
-  // displaying sausage Dog
   heartbreakEmoji.update();
 }
 

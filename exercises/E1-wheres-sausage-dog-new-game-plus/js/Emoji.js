@@ -44,13 +44,17 @@ class Emoji {
     pop();
   }
 
+  // x and y are defined in subclass Red.js in the mousePressed method
   overlap(x, y) {
-    if (mouseX > this.x - this.image.width / 2 &&
-      mouseX < this.x + this.image.width / 2 &&
-      mouseY > this.y - this.image.height / 2 &&
-      mouseY < this.y + this.image.height / 2) {
-      this.found = true;
-      state = `endPage`;
+    if (x > this.x - this.image.width / 2 &&
+      x < this.x + this.image.width / 2 &&
+      y > this.y - this.image.height / 2 &&
+      y < this.y + this.image.height / 2) {
+      // if mouse fits within the given parameters, the method returns true
+      // if not, then it returns false 
+      return true;
+    } else {
+      return false;
     }
   }
 
