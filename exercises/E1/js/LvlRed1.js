@@ -1,7 +1,7 @@
 // Heartbreak Emoji
 // subclass of super class Emoji.js
 
-class RedEmoji extends Emoji {
+class LvlRed1 extends Emoji {
 
   constructor(x, y, image) {
 
@@ -13,13 +13,18 @@ class RedEmoji extends Emoji {
     this.rotationSpeed = 0.25;
   }
 
+
   // when the sausge dog is found, it spins
   update() {
     super.update();
 
+
     if (this.found) {
       // we can use this.angle because it is inherited from the superclass
       this.angle += this.rotationSpeed;
+
+      this.image.width += 1;
+      this.image.height += 1;
     }
   }
 

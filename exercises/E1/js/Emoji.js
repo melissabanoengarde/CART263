@@ -1,5 +1,5 @@
 // Emoji
-// Class object for the game's emojis 
+// Class object for the game's emojis
 
 class Emoji {
 

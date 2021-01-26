@@ -11,6 +11,12 @@ Player has to click given emoji.
 
 ******************/
 
+// variables for our states/levels
+let state = `title`;
+let levelRed1;
+let levelOrange2;
+let levelYellow3;
+
 // declaring global constant for the number of redEmoji images and the number of redEmojis to display
 const NUM_RED_EMOJI_IMGS = 7;
 const NUM_RED_EMOJIS = 250;
@@ -32,6 +38,7 @@ const HEARTBREAK_EMOJI_IMG_PATH = `assets/images/red/heartbreak.png`;
 // preload()
 // Description of preload
 function preload() {
+
   // for-loop that counts up to the number of redEmoji images, puts that loaded image into our array
   for (let i = 0; i < NUM_RED_EMOJI_IMGS; i++) {
     // NEW NEW
@@ -49,8 +56,20 @@ function preload() {
 function setup() {
   createCanvas(windowWidth, windowHeight);
 
-  createRedEmojis();
-  createHeartbreakEmoji();
+  // creates red emojis
+  for (let i = 0; i < NUM_RED_EMOJIS; i++) {
+    let x = random(0, width);
+    let y = random(0, height);
+    let redEmojiImg = random(redEmojiImgs); // randomizes one of the 10 images
+
+    let redEmoji = new Emoji(x, y, redEmojiImg);
+    redEmojis.push(redEmoji);
+  }
+
+  // create sausage dog
+  let x = random(0, width);
+  let y = random(0, height);
+  heartbreakEmoji = new LvlRed1(x, y, heartbreakEmojiImg);
 }
 
 
@@ -59,49 +78,17 @@ function setup() {
 function draw() {
   background(217, 43, 43);
 
-  updateRedEmojis();
-  updateHeartbreakEmoji();
-}
-
-function mousePressed() {
-  heartbreakEmoji.mousePressed();
-}
-
-// function that creates the redEmojis
-function createRedEmojis() {
-  for (let i = 0; i < NUM_RED_EMOJIS; i++) {
-    createRandomRedEmojis();
-  }
-}
-
-// function that creates specific random redEmojis
-function createRandomRedEmojis() {
-  let x = random(0, width);
-  let y = random(0, height);
-  let redEmojiImg = random(redEmojiImgs); // randomizes one of the 10 images
-
-  let redEmoji = new Emoji(x, y, redEmojiImg);
-  redEmojis.push(redEmoji);
-}
-
-// function that creates the sausage Dog
-function createHeartbreakEmoji() {
-  // create sausage dog
-  let x = random(0, width);
-  let y = random(0, height);
-  heartbreakEmoji = new RedEmoji(x, y, heartbreakEmojiImg);
-}
-
-// function that draws random redEmojis
-function updateRedEmojis() {
+  // draws random red emojis
   for (let i = 0; i < redEmojis.length; i++) {
     // NEW NEW
     redEmojis[i].update();
   }
-}
-
-// updates code of sausage Dog
-function updateHeartbreakEmoji() {
+  // updaets heartbreak emoji
   // displaying sausage Dog
   heartbreakEmoji.update();
+
+}
+
+function mousePressed() {
+  heartbreakEmoji.mousePressed();
 }
