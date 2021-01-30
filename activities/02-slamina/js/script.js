@@ -213,7 +213,6 @@ function guessAnimal(animal) {
   console.log(currentAnswer)
 }
 
-
 // taken from the acitivity notes
 // https://pippinbarr.github.io/cart263-2021/activities/slamina.html
 // reverses the provided string...
