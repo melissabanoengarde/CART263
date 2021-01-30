@@ -19,11 +19,13 @@ class Emoji {
     this.infoDisplay();
   }
 
+  // displays instruction
   infoDisplay() {
     textSize(30);
     text(this.info, width/2, height/10);
   }
 
+  // emojis move in random directions at random speeds, constrained within the window
   move() {
     let change = random(0, 1);
     if (change < 0.05) {
@@ -51,7 +53,7 @@ class Emoji {
       y > this.y - this.image.height / 2 &&
       y < this.y + this.image.height / 2) {
       // if mouse fits within the given parameters, the method returns true
-      // if not, then it returns false 
+      // if not, then it returns false
       return true;
     } else {
       return false;
