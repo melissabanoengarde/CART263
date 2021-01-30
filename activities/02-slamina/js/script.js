@@ -152,12 +152,6 @@ const animals = [
 // where we'll store the animal the user is guessing
 let currentAnimal = ``;
 
-// preload()
-// Description of preload
-function preload() {
-
-}
-
 
 // setup()
 // Description of setup
@@ -170,4 +164,37 @@ function setup() {
 // Description of draw()
 function draw() {
 
+}
+
+function mousePressed() {
+  // assigns a random animal name from the animals array into "currentAnimal"
+  currentAnimal = random(animals);
+
+  // currentAnimal goes into the reverseString function --> "reverseString(string)"
+  let reverseAnimal = reverseString(currentAnimal);
+
+  // responsiveVoice repeats the element in reverse
+  responsiveVoice.speak(reverseAnimal);
+}
+
+// taken from the acitivity notes
+// https://pippinbarr.github.io/cart263-2021/activities/slamina.html
+// reverses the provided string...
+function reverseString(string) {
+
+  // 3 STEPS TO MAKE THE STRING GO BACKWARDS
+  // 1) Split the string into an array of characters
+  //    separates the characters and puts them all into an array, so we end up with each     character from a string in an array as individual elements
+  let characters = string.split('');
+
+  // 2) Reverse the array of characters
+  //    then we call the reverse method to reverse the elements in the array
+  let reverseCharacters = characters.reverse();
+
+  // 3) Join the array of characters back into a string
+  //  joins all the elements together then turns it into a string
+  let result = reverseCharacters.join('');
+
+  // Return the result
+  return result;
 }
