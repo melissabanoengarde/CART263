@@ -13,141 +13,141 @@ Melissa Banoen-Garde
 ******************/
 
 const animals = [
-      "aardvark",
-      "alligator",
-      "alpaca",
-      "antelope",
-      "ape",
-      "armadillo",
-      "baboon",
-      "badger",
-      "bat",
-      "bear",
-      "beaver",
-      "bison",
-      "boar",
-      "buffalo",
-      "bull",
-      "camel",
-      "canary",
-      "capybara",
-      "cat",
-      "chameleon",
-      "cheetah",
-      "chimpanzee",
-      "chinchilla",
-      "chipmunk",
-      "cougar",
-      "cow",
-      "coyote",
-      "crocodile",
-      "crow",
-      "deer",
-      "dingo",
-      "dog",
-      "donkey",
-      "dromedary",
-      "elephant",
-      "elk",
-      "ewe",
-      "ferret",
-      "finch",
-      "fish",
-      "fox",
-      "frog",
-      "gazelle",
-      "gila monster",
-      "giraffe",
-      "gnu",
-      "goat",
-      "gopher",
-      "gorilla",
-      "grizzly bear",
-      "ground hog",
-      "guinea pig",
-      "hamster",
-      "hedgehog",
-      "hippopotamus",
-      "hog",
-      "horse",
-      "hyena",
-      "ibex",
-      "iguana",
-      "impala",
-      "jackal",
-      "jaguar",
-      "kangaroo",
-      "koala",
-      "lamb",
-      "lemur",
-      "leopard",
-      "lion",
-      "lizard",
-      "llama",
-      "lynx",
-      "mandrill",
-      "marmoset",
-      "mink",
-      "mole",
-      "mongoose",
-      "monkey",
-      "moose",
-      "mountain goat",
-      "mouse",
-      "mule",
-      "muskrat",
-      "mustang",
-      "mynah bird",
-      "newt",
-      "ocelot",
-      "opossum",
-      "orangutan",
-      "oryx",
-      "otter",
-      "ox",
-      "panda",
-      "panther",
-      "parakeet",
-      "parrot",
-      "pig",
-      "platypus",
-      "polar bear",
-      "porcupine",
-      "porpoise",
-      "prairie dog",
-      "puma",
-      "rabbit",
-      "raccoon",
-      "ram",
-      "rat",
-      "reindeer",
-      "reptile",
-      "rhinoceros",
-      "salamander",
-      "seal",
-      "sheep",
-      "shrew",
-      "silver fox",
-      "skunk",
-      "sloth",
-      "snake",
-      "squirrel",
-      "tapir",
-      "tiger",
-      "toad",
-      "turtle",
-      "walrus",
-      "warthog",
-      "weasel",
-      "whale",
-      "wildcat",
-      "wolf",
-      "wolverine",
-      "wombat",
-      "woodchuck",
-      "yak",
-      "zebra"
-    ];
+  "aardvark",
+  "alligator",
+  "alpaca",
+  "antelope",
+  "ape",
+  "armadillo",
+  "baboon",
+  "badger",
+  "bat",
+  "bear",
+  "beaver",
+  "bison",
+  "boar",
+  "buffalo",
+  "bull",
+  "camel",
+  "canary",
+  "capybara",
+  "cat",
+  "chameleon",
+  "cheetah",
+  "chimpanzee",
+  "chinchilla",
+  "chipmunk",
+  "cougar",
+  "cow",
+  "coyote",
+  "crocodile",
+  "crow",
+  "deer",
+  "dingo",
+  "dog",
+  "donkey",
+  "dromedary",
+  "elephant",
+  "elk",
+  "ewe",
+  "ferret",
+  "finch",
+  "fish",
+  "fox",
+  "frog",
+  "gazelle",
+  "gila monster",
+  "giraffe",
+  "gnu",
+  "goat",
+  "gopher",
+  "gorilla",
+  "grizzly bear",
+  "ground hog",
+  "guinea pig",
+  "hamster",
+  "hedgehog",
+  "hippopotamus",
+  "hog",
+  "horse",
+  "hyena",
+  "ibex",
+  "iguana",
+  "impala",
+  "jackal",
+  "jaguar",
+  "kangaroo",
+  "koala",
+  "lamb",
+  "lemur",
+  "leopard",
+  "lion",
+  "lizard",
+  "llama",
+  "lynx",
+  "mandrill",
+  "marmoset",
+  "mink",
+  "mole",
+  "mongoose",
+  "monkey",
+  "moose",
+  "mountain goat",
+  "mouse",
+  "mule",
+  "muskrat",
+  "mustang",
+  "mynah bird",
+  "newt",
+  "ocelot",
+  "opossum",
+  "orangutan",
+  "oryx",
+  "otter",
+  "ox",
+  "panda",
+  "panther",
+  "parakeet",
+  "parrot",
+  "pig",
+  "platypus",
+  "polar bear",
+  "porcupine",
+  "porpoise",
+  "prairie dog",
+  "puma",
+  "rabbit",
+  "raccoon",
+  "ram",
+  "rat",
+  "reindeer",
+  "reptile",
+  "rhinoceros",
+  "salamander",
+  "seal",
+  "sheep",
+  "shrew",
+  "silver fox",
+  "skunk",
+  "sloth",
+  "snake",
+  "squirrel",
+  "tapir",
+  "tiger",
+  "toad",
+  "turtle",
+  "walrus",
+  "warthog",
+  "weasel",
+  "whale",
+  "wildcat",
+  "wolf",
+  "wolverine",
+  "wombat",
+  "woodchuck",
+  "yak",
+  "zebra"
+];
 
 // where we'll store the animal the user is guessing
 let currentAnimal = ``;
@@ -158,6 +158,7 @@ let currentAnswer = ``;
 // setup()
 // Description of setup
 function setup() {
+  createCanvas(windowWidth, windowHeight);
 
   // annyang
   if (annyang) {
@@ -165,26 +166,32 @@ function setup() {
     let commands = {
       // when annyang hears "I think it is *animal", its calls the guess Animal function
       'I think it is *animal': guessAnimal
-      };
+    };
 
-      // we add the custom command for annyang to execute
-      annyang.addCommands(commands);
+    // we add the custom command for annyang to execute
+    annyang.addCommands(commands);
 
-      // annyang starts to listen and repeat
-      annyang.start();
+    // annyang starts to listen and repeat
+    annyang.start();
 
-      // text styling
-      textSize(40);
-      textAlign(CENTER, CENTER);
-    }
+    // text styling
+    textSize(40);
+    textAlign(CENTER, CENTER);
   }
-
+}
 
 
 // draw()
 // Description of draw()
 function draw() {
+  background(238, 247, 188);
 
+  if (currentAnswer === currentAnimal) {
+    fill(0, 255, 0);
+  } else {
+    fill(255, 0, 0);
+  }
+  text(currentAnswer, width / 2, height / 2);
 }
 
 function mousePressed() {
@@ -201,7 +208,8 @@ function mousePressed() {
 // when annyang calls this function, it's going to send what the user said to this function in the parameter
 function guessAnimal(animal) {
   // current answer is the animal that was just said (by the user)
-  currentAnswer = animal;
+  // answer is always converted to lowercase
+  currentAnswer = animal.toLowerCase();
   console.log(currentAnswer)
 }
 
