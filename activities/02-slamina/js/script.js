@@ -152,12 +152,33 @@ const animals = [
 // where we'll store the animal the user is guessing
 let currentAnimal = ``;
 
+// variable to store the user's guess
+let currentAnswer = ``;
 
 // setup()
 // Description of setup
 function setup() {
 
-}
+  // annyang
+  if (annyang) {
+    // declaring a commands variable
+    let commands = {
+      // when annyang hears "I think it is *animal", its calls the guess Animal function
+      'I think it is *animal': guessAnimal
+      };
+
+      // we add the custom command for annyang to execute
+      annyang.addCommands(commands);
+
+      // annyang starts to listen and repeat
+      annyang.start();
+
+      // text styling
+      textSize(40);
+      textAlign(CENTER, CENTER);
+    }
+  }
+
 
 
 // draw()
@@ -176,6 +197,14 @@ function mousePressed() {
   // responsiveVoice repeats the element in reverse
   responsiveVoice.speak(reverseAnimal);
 }
+
+// when annyang calls this function, it's going to send what the user said to this function in the parameter
+function guessAnimal(animal) {
+  // current answer is the animal that was just said (by the user)
+  currentAnswer = animal;
+  console.log(currentAnswer)
+}
+
 
 // taken from the acitivity notes
 // https://pippinbarr.github.io/cart263-2021/activities/slamina.html
