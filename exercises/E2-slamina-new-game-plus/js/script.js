@@ -2,11 +2,11 @@
 
 /*****************
 
-Title of Project
-Author Name
+E2: Slamina new game plus
+Melissa Banoen-Garde
 
-This is a template. You must fill in the title,
-author, and this description to match your project!
+exercise applying the responsiveVoice
+and annyang library
 
 ******************/
 
