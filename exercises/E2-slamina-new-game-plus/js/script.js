@@ -13,9 +13,9 @@ and annyang library
 // array of instructions
 let instructions = [
   `Zoom out`,
-  `Welcome 🍵\nFeeling anxious?`,
-  `How you feel is valid and real`,
-  `But this is a gentle reminder that not all feelings are necessarily facts.`,
+  `Welcome\nFeeling anxious?`,
+  `How you feel is\nvalid and real`,
+  `But this is a gentle reminder that not all feelings are\nnecessarily facts.`,
   `Before we begin with this grounding technique, please be mindful of your breathing`,
   `Inhale... Exhale...`,
   `Name 5 things you see around you.`
@@ -62,7 +62,7 @@ function draw() {
 
   // APPLAYING THE DECLARED VARIABEL:
   // Displays the string in the declared value of the array; 0 = `Zoom Out` 🌀
-  text(displayed, width / 2, height / 2, 200,100);
+  text(displayed, width / 2, height / 2, 300,100);
 
 
   // Ripples
@@ -78,36 +78,40 @@ function draw() {
   pop();
 
   // instructions
-  if (size > 180 && size < 220) {
+  if (size > 180 && size < 250) {
   // Welcome...
   currentInstruction = 1;
   }
-    else if (size > 220 && size < 290) {
+    else if (size > 250 && size < 300) {
       // How you feel...
       currentInstruction = 2;
     }
-    else if (size > 290 && size < 320) {
+    else if (size > 300 && size < 350) {
       // But this is a gentle...
       currentInstruction = 3;
     }
-    else if(size > 320 && size < 350){
+    else if(size > 350 && size < 400){
       // Before we begin with...
       currentInstruction = 4;
     }
-    else if(size > 350 && size < 390){
+    else if(size > 400 && size < 450){
       // Inhale... Exhale
       currentInstruction = 5;
     }
-    else if (size > 390 && size < 410){
-      responsiveVoice.speak(instructions[6], "UK English Female", {rate:.5});
+    else if (instructions.length) { // size > 450 && size < 510
+      missCounselor();
     }
-    else {
-      return;
-    }
+
+
 }
 
 function mouseWheel(event) {
   size += event.delta;
   console.log(size);
 
+}
+
+function missCounselor() {
+  let talk = instructions[6];
+  responsiveVoice.speak(talk, "US English Female", {rate:.5});
 }
