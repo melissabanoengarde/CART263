@@ -12,6 +12,7 @@ Melissa Banoen-Garde
 
 ******************/
 
+// holds current state
 let state = `title`;
 
 const planets = [
@@ -36,6 +37,8 @@ let currentAnswer = ``;
 // variable to store Curiosity image
 let curiosityImg = undefined;
 
+let score;
+
 
 function preload() {
   curiosityImg = loadImage('assets/images/curiosity.png');
@@ -46,6 +49,8 @@ function preload() {
 // Description of setup
 function setup() {
   createCanvas(windowWidth, windowHeight);
+
+  score = new Score();
 
   // annyang
   if (annyang) {
@@ -112,7 +117,7 @@ function title() {
 
 // where the game happens
 function play() {
-    background(0, 50);
+    background(255);
 
     // what happens when the user is either right or wrong
     if (currentAnswer === currentPlanet) {
@@ -124,7 +129,8 @@ function play() {
     // displayed guess
     text(currentAnswer, width / 2, height / 2);
 
-    // scorebox 
+    // scorebox
+    score.display();
   }
 
   // what happens when the user guesses right
