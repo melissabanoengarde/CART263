@@ -2,7 +2,7 @@
 
 /*****************
 
-Activity 02: Slamina
+Activity 02: Slamina-new-game-plus
 Melissa Banoen-Garde
 
 + obtain a list of animal names for the user to guess
@@ -11,6 +11,8 @@ Melissa Banoen-Garde
 + need to display whether they got it right
 
 ******************/
+
+let state = `title`;
 
 const planets = [
   "earth",
@@ -23,11 +25,22 @@ const planets = [
   "mercury"
 ];
 
+let phrase = `Hello there! Would you like to play a game with me?`;
+
 // where we'll store the planet the user is guessing
 let currentPlanet = ``;
 
 // variable to store the user's guess
 let currentAnswer = ``;
+
+// variable to store Curiosity image
+let curiosityImg = undefined;
+
+
+function preload() {
+  curiosityImg = loadImage('assets/images/curiosity.png');
+}
+
 
 // setup()
 // Description of setup
@@ -39,9 +52,9 @@ function setup() {
     // declaring a commands variable
     let commands = {
       // when annyang hears "I think it is *planet", its calls the guess Planet function
-      'I think it is *planet': guessPlanet
+      'Is it *planet': guessPlanet
     };
-
+    annyang.debug();
     // we add the custom command for annyang to execute
     annyang.addCommands(commands);
 
@@ -49,7 +62,8 @@ function setup() {
     annyang.start();
 
     // text styling
-    textSize(40);
+    textSize(50);
+    textFont(`courier`);
     textAlign(CENTER, CENTER);
   }
 }
@@ -58,17 +72,85 @@ function setup() {
 // draw()
 // Description of draw()
 function draw() {
-  background(238, 247, 188);
-
-  if (currentAnswer === currentPlanet) {
-    fill(0, 255, 0);
-  } else {
-    fill(255, 0, 0);
+  if (state === `title`) {
+    title();
+  } else if (state === `play`) {
+    play();
+  } else if (state === `curiosityWins`) {
+    curiosityWins();
+  } else if (state === `userWins`) {
+    userWins();
   }
-  text(currentAnswer, width / 2, height / 2);
 }
 
+// title state
+function title() {
+  background(255);
+
+  push();
+  textSize(30);
+  fill(0);
+  text(`A Game with Curiosity`, width / 2 - 10, height / 3);
+
+  imageMode(CENTER);
+  image(curiosityImg, width/2, height/2, 350,200);
+  pop();
+
+  if (annyang) {
+    let commands = {
+      'Yes': function() {
+        state = `play`;
+      },
+      'No': function() {
+        alert(`Please say "yes", Curiosity would like to play with you.`);
+      }
+    };
+    annyang.addCommands(commands);
+    annyang.start();
+  }
+}
+
+// where the game happens
+function play() {
+    background(0, 50);
+
+    // what happens when the user is either right or wrong
+    if (currentAnswer === currentPlanet) {
+      right();
+    } else {
+      wrong();
+    }
+
+    // displayed guess
+    text(currentAnswer, width / 2, height / 2);
+
+    // scorebox 
+  }
+
+  // what happens when the user guesses right
+  function right() {
+    fill(0, 255, 0);
+  }
+
+  // what happens when the user guesses wrong
+  function wrong() {
+    fill(255, 0, 0);
+  }
+
+
+
+// User clicks the screen, responsiveVoice says a planet backwards
 function mousePressed() {
+  // only plays when the state is set to 'title'
+  if (state === `title`) {
+    responsiveVoice.speak(phrase, "UK English Male", {
+      pitch: 1.5,
+      rate: 0.7
+    });
+  }
+
+  // only works when state is set to 'play'
+  if (state === `play`) {
   // assigns a random planet name from the planets array into "currentPlanet"
   currentPlanet = random(planets);
 
@@ -76,8 +158,13 @@ function mousePressed() {
   let reversePlanet = reverseString(currentPlanet);
 
   // responsiveVoice repeats the element in reverse
-  responsiveVoice.speak(reversePlanet);
+  responsiveVoice.speak(reversePlanet, "UK English Male", {
+    pitch: 1.5,
+    rate: 0.7
+  });
+ }
 }
+
 
 // when annyang calls this function, it's going to send what the user said to this function in the parameter
 function guessPlanet(planet) {
@@ -86,6 +173,7 @@ function guessPlanet(planet) {
   currentAnswer = planet.toLowerCase();
   console.log(currentAnswer)
 }
+
 
 // taken from the acitivity notes
 // https://pippinbarr.github.io/cart263-2021/activities/slamina.html
@@ -108,3 +196,17 @@ function reverseString(string) {
   // Return the result
   return result;
 }
+
+function curiosityWins() {
+
+}
+
+function userWins() {
+
+}
+
+// function keyPressed() {
+//   if (keyIsDown(32) && state === `title`) {
+//     state = `play`;
+//   }
+// }
