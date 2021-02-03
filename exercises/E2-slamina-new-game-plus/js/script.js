@@ -2,20 +2,26 @@
 
 /*****************
 
-Activity 02: Slamina-new-game-plus
+Activity 02: A Game with Curiosity!
 Melissa Banoen-Garde
 
-+ obtain a list of animal names for the user to guess
-+ figure out how to make ResponsiveVoice say an animal's name backwards
-+ need to have annyang listen to a user command representing a guess
-+ need to display whether they got it right
-
++ added states and a separate in-game state
+  - in-game states helps responsiveVoice determine what to say
++ added sounded effects. responsiveVoice either says
+  - a planet
+  - "good job!" when the answer is right
+  -"not quite!" when the answer is wrong
++ changed the set of answers
+ 
 ******************/
 
 // holds current state
 let state = `title`;
+
+// holds the states in game
 let resultState = ``;
 
+// array of planets
 const planets = [
   "earth",
   "jupiter",
@@ -27,6 +33,7 @@ const planets = [
   "mercury"
 ];
 
+// This is what curiosity says in the "title" state
 let phrase = `Hello there! Would you like to play a game with me?`;
 
 // where we'll store the planet the user is guessing
@@ -35,10 +42,8 @@ let currentPlanet = ``;
 // variable to store the user's guess
 let currentAnswer = ``;
 
-// variable to store Curiosity image
+// variable to store the Curiosity rover image
 let curiosityImg = undefined;
-
-let score;
 
 
 function preload() {
@@ -47,12 +52,9 @@ function preload() {
 
 
 // setup()
-// Description of setup
 function setup() {
   createCanvas(windowWidth, windowHeight);
   imageMode(CENTER);
-
-  score = new Score();
 
   // annyang
   if (annyang) {
@@ -75,22 +77,18 @@ function setup() {
   }
 }
 
-
 // draw()
-// Description of draw()
+// order of the states
 function draw() {
   if (state === `title`) {
     title();
   } else if (state === `play`) {
     play();
-  } else if (state === `curiosityWins`) {
-    curiosityWins();
-  } else if (state === `userWins`) {
-    userWins();
   }
 }
 
-// title state
+// title state displaying Curiosity, asking the user if they'd like to play with them
+// user must reply yes or no. if the user say yes, it switches states.
 function title() {
   background(255);
 
@@ -101,11 +99,11 @@ function title() {
 
   push();
   textSize(10);
-  text(`Click me!`, width/2 - 10, height/3 * 2);
+  text(`Click me!`, width / 2 - 10, height / 3 * 2);
   pop();
   pop();
 
-  image(curiosityImg, width/2, height/2, 350,200);
+  image(curiosityImg, width / 2, height / 2, 350, 200);
 
   // if the user says yes, the state switches to the game
   // if the user says no, the user is prompted to basically say yes
@@ -123,46 +121,53 @@ function title() {
   }
 }
 
-// where the game happens
+// where the game begins
 function play() {
-    background(255);
+  background(255);
 
-    // // what happens when the user is either right or wrong
-    if (currentAnswer === currentPlanet) {
-      right();
-    } else {
-      wrong();
-    }
+  // instructions
+  push();
+  fill(0);
+  textSize(15);
+  textAlign(LEFT);
+  text(`1. Guess the planet that Curiosity is saying in reserve.\n2. Click Curiosity for a word to guess.\n3. Articulate your answer starting with "Is it..."`, 10, 50);
+  pop();
 
-    // instructions
-    push();
-    fill(0);
-    textSize(10);
-    textAlign(LEFT);
-    text(`1. Guess the planet that Curiosity is saying backwards.\n2. Click Curiosity for a word to guess.\n3. Articulate your answer starting with "Is it..."`, 10, 50);
-    pop();
+  image(curiosityImg, width / 2, height / 2, 350, 200);
 
-    // displayed guess
-    // text(currentAnswer, width/2, height / 3);
-
-    image(curiosityImg, width/2, height/2, 350,200);
-
-    // scorebox
-    score.display();
-  }
-
-function right() {
-  resultState = `right`;
-  score.userScore++;
-  fill(0,255,0);
-  text(currentAnswer, width/2, height / 3);
 }
 
+// if the user guesses right, the program calls the "right" function
+// if the user guesses wrong, the program calls the "wrong" function
+function answer() {
+  // // what happens when the user is either right or wrong
+  if (currentAnswer === currentPlanet) {
+    right();
+  } else {
+    wrong();
+  }
+}
+
+// Curiosity says "good job!" when the user guesses right
+function right() {
+  push();
+  resultState = `right`;
+  responsiveVoice.speak(`Good job!`, "UK English Male", {
+    pitch: 1.5,
+    rate: 0.7
+  });
+  pop();
+}
+
+// Curiosity says "not quite!" when the user guesses wrong
 function wrong() {
+  push();
   resultState = `wrong`;
-  score.curiosityScore++;
-  fill(255,0,0);
-  text(currentAnswer, width/2, height / 3);
+  responsiveVoice.speak(`Not quite!`, "UK English Male", {
+    pitch: 1.5,
+    rate: 0.7
+  });
+  pop();
 }
 
 
@@ -174,22 +179,25 @@ function mousePressed() {
       pitch: 1.5,
       rate: 0.7,
     });
+    resultState = `none`;
   }
 
   // only works when state is set to 'play'
   if (state === `play`) {
-  // assigns a random planet name from the planets array into "currentPlanet"
-  currentPlanet = random(planets);
 
-  // currentPlanet goes into the reverseString function --> "reverseString(string)"
-  let reversePlanet = reverseString(currentPlanet);
+    // assigns a random planet name from the planets array into "currentPlanet"
+    currentPlanet = random(planets);
 
-  // responsiveVoice repeats the element in reverse
-  responsiveVoice.speak(reversePlanet, "UK English Male", {
-    pitch: 1.5,
-    rate: 0.7,
-  });
- }
+    // currentPlanet goes into the reverseString function --> "reverseString(string)"
+    let reversePlanet = reverseString(currentPlanet);
+
+    // responsiveVoice repeats the element in reverse
+    responsiveVoice.speak(reversePlanet, "UK English Male", {
+      pitch: 1.5,
+      rate: 0.7,
+    });
+    resultState = `inGame`;
+  }
 }
 
 
@@ -198,7 +206,7 @@ function guessPlanet(planet) {
   // current answer is the planet that was just said (by the user)
   // answer is always converted to lowercase
   currentAnswer = planet.toLowerCase();
-  console.log(currentAnswer)
+  answer();
 }
 
 
@@ -207,7 +215,7 @@ function guessPlanet(planet) {
 // reverses the provided string...
 function reverseString(string) {
 
-  // 3 STEPS TO MAKE THE STRING GO BACKWARDS
+  // 3 STEPS TO REVERSE THE STRING
   // 1) Split the string into an array of characters
   //    Separates the characters and puts them all into an array, so we end up with each character from a string  in an array as individual elements
   let characters = string.split('');
@@ -223,17 +231,3 @@ function reverseString(string) {
   // Return the result
   return result;
 }
-
-function curiosityWins() {
-
-}
-
-function userWins() {
-
-}
-
-// function keyPressed() {
-//   if (keyIsDown(32) && state === `title`) {
-//     state = `play`;
-//   }
-// }
