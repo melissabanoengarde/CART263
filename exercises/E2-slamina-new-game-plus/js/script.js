@@ -14,6 +14,7 @@ Melissa Banoen-Garde
 
 // holds current state
 let state = `title`;
+let resultState = ``;
 
 const planets = [
   "earth",
@@ -49,6 +50,7 @@ function preload() {
 // Description of setup
 function setup() {
   createCanvas(windowWidth, windowHeight);
+  imageMode(CENTER);
 
   score = new Score();
 
@@ -97,10 +99,16 @@ function title() {
   fill(0);
   text(`A Game with Curiosity`, width / 2 - 10, height / 3);
 
-  imageMode(CENTER);
-  image(curiosityImg, width/2, height/2, 350,200);
+  push();
+  textSize(10);
+  text(`Click me!`, width/2 - 10, height/3 * 2);
+  pop();
   pop();
 
+  image(curiosityImg, width/2, height/2, 350,200);
+
+  // if the user says yes, the state switches to the game
+  // if the user says no, the user is prompted to basically say yes
   if (annyang) {
     let commands = {
       'Yes': function() {
@@ -119,30 +127,43 @@ function title() {
 function play() {
     background(255);
 
-    // what happens when the user is either right or wrong
+    // // what happens when the user is either right or wrong
     if (currentAnswer === currentPlanet) {
       right();
     } else {
       wrong();
     }
 
+    // instructions
+    push();
+    fill(0);
+    textSize(10);
+    textAlign(LEFT);
+    text(`1. Guess the planet that Curiosity is saying backwards.\n2. Click Curiosity for a word to guess.\n3. Articulate your answer starting with "Is it..."`, 10, 50);
+    pop();
+
     // displayed guess
-    text(currentAnswer, width / 2, height / 2);
+    // text(currentAnswer, width/2, height / 3);
+
+    image(curiosityImg, width/2, height/2, 350,200);
 
     // scorebox
     score.display();
   }
 
-  // what happens when the user guesses right
-  function right() {
-    fill(0, 255, 0);
-  }
+function right() {
+  resultState = `right`;
+  score.userScore++;
+  fill(0,255,0);
+  text(currentAnswer, width/2, height / 3);
+}
 
-  // what happens when the user guesses wrong
-  function wrong() {
-    fill(255, 0, 0);
-  }
-
+function wrong() {
+  resultState = `wrong`;
+  score.curiosityScore++;
+  fill(255,0,0);
+  text(currentAnswer, width/2, height / 3);
+}
 
 
 // User clicks the screen, responsiveVoice says a planet backwards
@@ -151,7 +172,7 @@ function mousePressed() {
   if (state === `title`) {
     responsiveVoice.speak(phrase, "UK English Male", {
       pitch: 1.5,
-      rate: 0.7
+      rate: 0.7,
     });
   }
 
@@ -166,7 +187,7 @@ function mousePressed() {
   // responsiveVoice repeats the element in reverse
   responsiveVoice.speak(reversePlanet, "UK English Male", {
     pitch: 1.5,
-    rate: 0.7
+    rate: 0.7,
   });
  }
 }
