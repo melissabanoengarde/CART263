@@ -40,11 +40,19 @@ function setup() {
   // loads profile data
   let data = JSON.parse(localStorage.getItem(`spy-profile-data`));
 
+  // checks if there is data in the data variable
   if (data !== null) {
-    spyProfile.name = data.name;
-    spyProfile.alias = data.alias;
-    spyProfile.secretWeapon = data.secretWeapon;
-    spyProfile.password = data.password;
+    // asks user to provide previously given password
+    let password = prompt(`Please provide secret password`);
+    // if password matches given password
+    if (password === data.password) {
+      // user can see their profile
+      spyProfile.name = data.name;
+      spyProfile.alias = data.alias;
+      spyProfile.secretWeapon = data.secretWeapon;
+      spyProfile.password = data.password;
+    }
+    // if password doesn't match, nothing happens and they can only see the "redacted" profile
   }
   else {
     generateSpyProfile();
@@ -91,4 +99,14 @@ Password: ${spyProfile.password}
   fill(82, 81, 74);
   text(profile, 30, height/7);
   pop();
+}
+
+// ++ adding this here ++
+// erases data
+function keyPressed() {
+  // if the c key is pressed then...
+  if (key ===`c`) {
+    // it will call the removeItem() function and the data is erased
+    localStorage.removeItem(`spy-profile-data`);
+  }
 }
