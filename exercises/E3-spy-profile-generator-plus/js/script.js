@@ -16,6 +16,7 @@ let spyProfile = {
   name: `**REDACTED**`,
   alias: `**REDACTED**`,
   secretWeapon: `**REDACTED**`,
+  specialMove: `**REDACTED**`,
   password: `**REDACTED**`
 };
 
@@ -24,12 +25,16 @@ let tarotData = undefined;
 let objectData = undefined;
 let instrumentData = undefined;
 let gemstoneData = undefined;
+let nationalityData = undefined;
+let movesData = undefined;
 
 // constants of the URLs to the JSON datas
 const TAROT_DATA_SOURCE = `https://raw.githubusercontent.com/dariusk/corpora/master/data/divination/tarot_interpretations.json`;
 const OBJECT_DATA_SOURCE = `https://raw.githubusercontent.com/dariusk/corpora/master/data/objects/objects.json`;
 const INSTRUMENT_DATA_SOURCE = `https://raw.githubusercontent.com/dariusk/corpora/master/data/music/instruments.json`;
 const GEMSTONE_DATA_SOURCE = `https://raw.githubusercontent.com/dariusk/corpora/master/data/materials/gemstones.json`;
+const NATIONALITY_DATA_SOURCE = `https://raw.githubusercontent.com/dariusk/corpora/master/data/geography/nationalities.json`;
+const MOVES_DATA_SOURCE = `https://raw.githubusercontent.com/dariusk/corpora/master/data/games/street_fighter_ii.json`;
 
 // variable for the background colour
 let bgFill = {
@@ -51,6 +56,8 @@ function preload() {
   objectData = loadJSON(OBJECT_DATA_SOURCE);
   instrumentData = loadJSON(INSTRUMENT_DATA_SOURCE);
   gemstoneData = loadJSON(GEMSTONE_DATA_SOURCE);
+  nationalityData = loadJSON(NATIONALITY_DATA_SOURCE);
+  movesData = loadJSON(MOVES_DATA_SOURCE);
 }
 
 // setup()
@@ -75,6 +82,7 @@ function checkData() {
       spyProfile.name = data.name;
       spyProfile.alias = data.alias;
       spyProfile.secretWeapon = data.gemstone + data.secretWeapon;
+      spyProfile.specialMove = data.specialMove;
       spyProfile.password = data.password;
     }
     // if password doesn't match, nothing happens and they can only see the "redacted" profile
@@ -89,13 +97,22 @@ function generateSpyProfile() {
   // prompts user to provide name
   spyProfile.name = prompt(`Please provide your name.`);
 
+  // Alias
   let instrument = random(instrumentData.instruments);
-  spyProfile.alias = `The ${instrument}`;
+  spyProfile.alias = `the ${instrument}`;
 
+  // Secret weapon
   let object = random(objectData.objects);
   let gemstone = random(gemstoneData.gemstones); // New
   spyProfile.secretWeapon = `a ${gemstone} ${object}`;
 
+  // Special Move
+  let nationality = random(nationalityData.nationalities);
+  let character = random(movesData.characters);
+  let move = random(character.moves);
+  spyProfile.specialMove = `the ${nationality} ${move}`;
+
+  // Password
   let card = random(tarotData.tarot_interpretations);
   spyProfile.password = random(card.keywords); //randomizes card, selects its "keyword" category then randomizes and selects an element in that (keyword) category
 
@@ -113,6 +130,7 @@ function draw() {
 Name: ${spyProfile.name}
 Alias: ${spyProfile.alias}
 Secret Weapon: ${spyProfile.secretWeapon}
+Special Move: ${spyProfile.specialMove}
 Password: ${spyProfile.password}
 `;
 
