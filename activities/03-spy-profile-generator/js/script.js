@@ -25,18 +25,42 @@ let tarotData = undefined;
 let objectData = undefined;
 let instrumentData = undefined;
 
+// constants of the URLs to the JSON datas
+const TAROT_DATA_SOURCE = `https://raw.githubusercontent.com/dariusk/corpora/master/data/divination/tarot_interpretations.json`;
+const OBJECT_DATA_SOURCE = `https://raw.githubusercontent.com/dariusk/corpora/master/data/objects/objects.json`;
+const INSTRUMENT_DATA_SOURCE = `https://raw.githubusercontent.com/dariusk/corpora/master/data/music/instruments.json`;
+
+// variable for the background colour
+let bgFill = {
+  r: 171,
+  g: 169,
+  b: 157
+};
+
+// variable for the font fill
+let fontFill = {
+  r: 82,
+  g: 81,
+  b: 74
+};
+
 function preload() {
   // from Darius Kazemi's corpora project
-  tarotData = loadJSON(`https://raw.githubusercontent.com/dariusk/corpora/master/data/divination/tarot_interpretations.json`);
-  objectData = loadJSON(`https://raw.githubusercontent.com/dariusk/corpora/master/data/objects/objects.json`);
-  instrumentData = loadJSON(`https://raw.githubusercontent.com/dariusk/corpora/master/data/music/instruments.json`);
+  tarotData = loadJSON(TAROT_DATA_SOURCE);
+  objectData = loadJSON(OBJECT_DATA_SOURCE);
+  instrumentData = loadJSON(INSTRUMENT_DATA_SOURCE);
 }
 
 // setup()
 // Description of setup
 function setup() {
   createCanvas(550, 380);
+  checkData();
+}
 
+// checkData
+// checks for existing data.
+function checkData() {
   // loads profile data
   let data = JSON.parse(localStorage.getItem(`spy-profile-data`));
 
@@ -53,8 +77,7 @@ function setup() {
       spyProfile.password = data.password;
     }
     // if password doesn't match, nothing happens and they can only see the "redacted" profile
-  }
-  else {
+  } else {
     generateSpyProfile();
   }
 }
@@ -81,7 +104,7 @@ function generateSpyProfile() {
 // draw()
 // Description of draw()
 function draw() {
-  background(171, 169, 157);
+  background(bgFill.r, bgFill.g, bgFill.b);
 
   // template string
   let profile = `** AGENT PROFILE **\n
@@ -93,11 +116,11 @@ Password: ${spyProfile.password}
 
   // displays name input
   push();
-  textFont('Courier');
+  textFont('Courier', 'monospace');
   textSize(20);
   textAlign(LEFT);
-  fill(82, 81, 74);
-  text(profile, 30, height/7);
+  fill(fontFill.r, fontFill.g, fontFill.b);
+  text(profile, 30, height / 7);
   pop();
 }
 
@@ -105,7 +128,7 @@ Password: ${spyProfile.password}
 // erases data
 function keyPressed() {
   // if the c key is pressed then...
-  if (key ===`c`) {
+  if (key === `c`) {
     // it will call the removeItem() function and the data is erased
     localStorage.removeItem(`spy-profile-data`);
   }
