@@ -2,11 +2,13 @@
 
 /*****************
 
-Title of Project
-Author Name
+Activity 04: Spy Profile Generator
+Melissa Banoen-Garde
 
-This is a template. You must fill in the title,
-author, and this description to match your project!
++ get user's name and display a default profile
++ generate a profile instead using JSON data
++ save and load the generated profile
++ add a password check 
 
 ******************/
 
