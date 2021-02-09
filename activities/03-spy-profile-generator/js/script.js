@@ -37,7 +37,18 @@ function preload() {
 function setup() {
   createCanvas(550, 380);
 
-  generateSpyProfile();
+  // loads profile data
+  let data = JSON.parse(localStorage.getItem(`spy-profile-data`));
+
+  if (data !== null) {
+    spyProfile.name = data.name;
+    spyProfile.alias = data.alias;
+    spyProfile.secretWeapon = data.secretWeapon;
+    spyProfile.password = data.password;
+  }
+  else {
+    generateSpyProfile();
+  }
 }
 
 // generateSpyProfile
@@ -55,6 +66,8 @@ function generateSpyProfile() {
   let card = random(tarotData.tarot_interpretations);
   spyProfile.password = random(card.keywords); //randomizes card, selects its "keyword" category then randomizes and selects an element in that (keyword) category
 
+  // saves generated profile
+  localStorage.setItem(`spy-profile-data`, JSON.stringify(spyProfile));
 }
 
 // draw()
