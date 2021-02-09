@@ -52,7 +52,6 @@ function preload() {
 }
 
 // setup()
-// Description of setup
 function setup() {
   createCanvas(550, 380);
   checkData();
@@ -102,7 +101,7 @@ function generateSpyProfile() {
 }
 
 // draw()
-// Description of draw()
+// displays the generated agent profile
 function draw() {
   background(bgFill.r, bgFill.g, bgFill.b);
 
