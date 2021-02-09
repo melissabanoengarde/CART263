@@ -14,34 +14,68 @@ Melissa Banoen-Garde
 
 // global variable
 let spyProfile = {
-  name: `REDACTED`,
-  alias: `REDACTED`,
-  secretWeapon: `REDACTED`,
-  password: `REDACTED`
+  name: `**REDACTED**`,
+  alias: `**REDACTED**`,
+  secretWeapon: `**REDACTED**`,
+  password: `**REDACTED**`
 };
 
+// variable to store data (alias)
+let tarotData = undefined;
+let objectData = undefined;
+let instrumentData = undefined;
+
+function preload() {
+  // from Darius Kazemi's corpora project
+  tarotData = loadJSON(`https://raw.githubusercontent.com/dariusk/corpora/master/data/divination/tarot_interpretations.json`);
+  objectData = loadJSON(`https://raw.githubusercontent.com/dariusk/corpora/master/data/objects/objects.json`);
+  instrumentData = loadJSON(`https://raw.githubusercontent.com/dariusk/corpora/master/data/music/instruments.json`);
+}
 
 // setup()
 // Description of setup
 function setup() {
-  createCanvas(380, 550);
+  createCanvas(550, 380);
 
-  // prompts user to provide name
-  spyProfile.name = prompt(`Please provide your name.`);
+  generateSpyProfile();
 }
 
+// generateSpyProfile
+// generates user's alias, secret weapon, and password
+function generateSpyProfile() {
+  // prompts user to provide name
+  spyProfile.name = prompt(`Please provide your name.`);
+
+  let instrument = random(instrumentData.instruments);
+  spyProfile.alias = `The ${instrument}`;
+
+  let object = random(objectData.objects);
+  spyProfile.secretWeapon = object;
+
+  let card = random(tarotData.tarot_interpretations);
+  spyProfile.password = random(card.keywords); //randomizes card, selects its "keyword" category then randomizes and selects an element in that (keyword) category
+
+}
 
 // draw()
 // Description of draw()
 function draw() {
-  background(8, 25, 74);
+  background(171, 169, 157);
+
+  // template string
+  let profile = `** AGENT PROFILE **\n
+Name: ${spyProfile.name}
+Alias: ${spyProfile.alias}
+Secret Weapon: ${spyProfile.secretWeapon}
+Password: ${spyProfile.password}
+`;
 
   // displays name input
   push();
   textFont('Courier');
   textSize(20);
-  textAlign(CENTER, CENTER);
-  fill(230, 209, 90);
-  text(`Greetings, ${spyProfile.name}.`, width/2, height/4);
+  textAlign(LEFT);
+  fill(82, 81, 74);
+  text(profile, 30, height/7);
   pop();
 }
