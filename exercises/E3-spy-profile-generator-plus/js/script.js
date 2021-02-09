@@ -2,13 +2,12 @@
 
 /*****************
 
-Activity 03: Spy Profile Generator
+E3: Spy Profile Generator Plus
 Melissa Banoen-Garde
 
-+ get user's name and display a default profile
-+ generate a profile instead using JSON data
-+ save and load the generated profile
-+ add a password check
++ Add more categories to the profile and generate them with other data
++ Add the ability to delete the current profile data with a keyboard command or button ☑️
++ Find more creative ways to generate profile values, such as combining parts of different sets of data ☑️
 
 ******************/
 
@@ -24,11 +23,13 @@ let spyProfile = {
 let tarotData = undefined;
 let objectData = undefined;
 let instrumentData = undefined;
+let gemstoneData = undefined;
 
 // constants of the URLs to the JSON datas
 const TAROT_DATA_SOURCE = `https://raw.githubusercontent.com/dariusk/corpora/master/data/divination/tarot_interpretations.json`;
 const OBJECT_DATA_SOURCE = `https://raw.githubusercontent.com/dariusk/corpora/master/data/objects/objects.json`;
 const INSTRUMENT_DATA_SOURCE = `https://raw.githubusercontent.com/dariusk/corpora/master/data/music/instruments.json`;
+const GEMSTONE_DATA_SOURCE = `https://raw.githubusercontent.com/dariusk/corpora/master/data/materials/gemstones.json`;
 
 // variable for the background colour
 let bgFill = {
@@ -49,6 +50,7 @@ function preload() {
   tarotData = loadJSON(TAROT_DATA_SOURCE);
   objectData = loadJSON(OBJECT_DATA_SOURCE);
   instrumentData = loadJSON(INSTRUMENT_DATA_SOURCE);
+  gemstoneData = loadJSON(GEMSTONE_DATA_SOURCE);
 }
 
 // setup()
@@ -72,7 +74,7 @@ function checkData() {
       // user can see their profile
       spyProfile.name = data.name;
       spyProfile.alias = data.alias;
-      spyProfile.secretWeapon = data.secretWeapon;
+      spyProfile.secretWeapon = data.gemstone + data.secretWeapon;
       spyProfile.password = data.password;
     }
     // if password doesn't match, nothing happens and they can only see the "redacted" profile
@@ -91,7 +93,8 @@ function generateSpyProfile() {
   spyProfile.alias = `The ${instrument}`;
 
   let object = random(objectData.objects);
-  spyProfile.secretWeapon = object;
+  let gemstone = random(gemstoneData.gemstones); // New
+  spyProfile.secretWeapon = `a ${gemstone} ${object}`;
 
   let card = random(tarotData.tarot_interpretations);
   spyProfile.password = random(card.keywords); //randomizes card, selects its "keyword" category then randomizes and selects an element in that (keyword) category
