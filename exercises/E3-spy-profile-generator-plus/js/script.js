@@ -58,7 +58,7 @@ let fontFill = {
 };
 
 function preload() {
-  // from Darius Kazemi's corpora project
+  // JSON data via Darius Kazemi's corpora project
   tarotData = loadJSON(TAROT_DATA_SOURCE);
   objectData = loadJSON(OBJECT_DATA_SOURCE);
   instrumentData = loadJSON(INSTRUMENT_DATA_SOURCE);
@@ -136,7 +136,7 @@ function generateSpyProfile() {
 }
 
 // draw()
-// displays the generated agent profile
+// generates agent's profile
 function draw() {
   displayProfile();
 }
@@ -173,13 +173,10 @@ PASSWORD: ${spyProfile.password}
   textSize(10);
   text(`SPACEBAR KEY = SELF-DESTRUCT DOCUMENT`, 30, height - 30);
   pop();
-
-
 }
 
-// erases data
+// erases data when the user presses the spacebar key
 function keyPressed() {
-  // if the spacebar key is pressed then...
   if (keyIsDown(32)) {
     // it will call the removeItem() function to erase data and reloads the page
     localStorage.removeItem(`spy-profile-data`);
