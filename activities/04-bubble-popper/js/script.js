@@ -15,6 +15,13 @@ Melissa Banoen-Garde
 // global video variable
 let video;
 
+// global handpose variable
+let handpose = undefined;
+
+// global predictions variable
+let predictions = [];
+
+
 // preload()
 // Description of preload
 function preload() {
@@ -27,11 +34,27 @@ function preload() {
 function setup() {
   createCanvas(640, 480);
 
-  // accesses the webcam 
+  // WEBCAM
+  // accesses the webcam
   video = createCapture(VIDEO);
-
   // hides video element so it doesn't display on the page
-  createCapture.hide();
+  video.hide();
+
+  // HANDPOSE
+  // handpose = ml5.handpose(?video, ?options, ?callback);
+  handpose = ml5.handpose(video, {
+    flipHorizontal: true
+  }, function () {
+    console.log(`Model loaded.`)
+  });
+
+  // listens for predictions
+  // keeps predictions array up to date with the latest result
+  handpose.on(`predict`, function (results) {
+    console.log(results);
+    predictions = results;
+  });
+
 }
 
 
