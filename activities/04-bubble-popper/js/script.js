@@ -61,5 +61,23 @@ function setup() {
 // draw()
 // Description of draw()
 function draw() {
+  background(45, 161, 62); // green
 
+  // checks if predictions aaray has anything in it (length)
+  if (predictions.length > 0) {
+    let hand = predictions[0]; // handpose only predicts a single hand
+    let index = hand.annotations.indexFinger;
+    let tip = index[3];
+    let base = index[0];
+      let tipX = tip[0];
+      let tipY = tip[1];
+        let baseX = base[0];
+        let baseY = base[1];
+
+    // drawing the pin
+    push();
+    stroke(255);
+    line(baseX, baseY, tipX, tipY);
+    pop();
+  }
 }
