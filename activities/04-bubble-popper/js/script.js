@@ -46,13 +46,13 @@ function setup() {
   // handpose = ml5.handpose(?video, ?options, ?callback);
   handpose = ml5.handpose(video, {
     flipHorizontal: true
-  }, function () {
+  }, function() {
     console.log(`Model loaded.`)
   });
 
   // listens for predictions
   // keeps predictions array up to date with the latest result
-  handpose.on(`predict`, function (results) {
+  handpose.on(`predict`, function(results) {
     console.log(results);
     predictions = results;
   });
@@ -85,10 +85,10 @@ function pin() {
     let index = hand.annotations.indexFinger;
     let tip = index[3];
     let base = index[0];
-      let tipX = tip[0];
-      let tipY = tip[1];
-        let baseX = base[0];
-        let baseY = base[1];
+    let tipX = tip[0];
+    let tipY = tip[1];
+    let baseX = base[0];
+    let baseY = base[1];
 
     // drawing the pin
     // pin body
@@ -100,7 +100,7 @@ function pin() {
     // pin head
     push();
     noStroke();
-    fill(255,0,0);
+    fill(255, 0, 0);
     ellipse(baseX, baseY, 20);
     pop();
   }
@@ -131,7 +131,7 @@ function popCheck() {
   // calculates the distance between the bubble and the pin
   let d = dist(tipX, tipY, bubble.x, bubble.y);
   // if the distance is less than half the size of the bubble
-  if (d < bubble.size/2) {
+  if (d < bubble.size / 2) {
     // the bubble resets (starts from the bottom again )
     bubble.x = random(width);
     bubble = height;
