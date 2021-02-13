@@ -104,6 +104,8 @@ function pin() {
     ellipse(baseX, baseY, 20);
     pop();
   }
+
+  popCheck();
 }
 
 function risingBubble() {
@@ -122,4 +124,16 @@ function risingBubble() {
   noStroke();
   ellipse(bubble.x, bubble.y, bubble.size);
   pop();
+}
+
+function popCheck() {
+  // check bubble popping
+  // calculates the distance between the bubble and the pin
+  let d = dist(tipX, tipY, bubble.x, bubble.y);
+  // if the distance is less than half the size of the bubble
+  if (d < bubble.size/2) {
+    // the bubble resets (starts from the bottom again )
+    bubble.x = random(width);
+    bubble = height;
+  }
 }
