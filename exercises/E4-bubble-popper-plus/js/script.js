@@ -38,14 +38,21 @@ let yellow;
 // Description of setup
 function setup() {
   createCanvas(640, 480);
+  initializeWebcam();
+  initializeHandpose();
+  initializeBubbles();
+}
 
-  // WEBCAM
+// WEBCAM
+function initializeWebcam() {
   // accesses the webcam
   video = createCapture(VIDEO);
   // hides video element so it doesn't display on the page
   video.hide();
+}
 
-  // HANDPOSE
+// HANDPOSE
+function initializeHandpose() {
   // handpose = ml5.handpose(?video, ?options, ?callback);
   handpose = ml5.handpose(video, {
     flipHorizontal: true
@@ -59,8 +66,10 @@ function setup() {
     console.log(results);
     predictions = results;
   });
+}
 
-  // BUBBLE
+// BUBBLES
+function initializeBubbles() {
   // Red bubbles
   for (let i = 0; i < 2; i++) {
     // defining parameters of the bubbles
@@ -100,7 +109,6 @@ function setup() {
     bubbles.push(yellow);
   }
 }
-
 
 // if-statement that handles the state of the program
 function draw() {
@@ -154,13 +162,13 @@ function pins() {
 
     // check bubble popping
     // calculates the distance between the bubble and the pin
-    let d = dist(tipX, tipY, bubble.x, bubble.y);
-    // // if the distance is less than half the size of the bubble
-    if (d < bubble.size / 2) {
-      //   // the bubble resets (starts from the bottom again )
-      bubble.x = random(width);
-      bubble.y = random(height, 500);
-    }
+    // let d = dist(tipX, tipY, bubble.x, bubble.y);
+    // // // if the distance is less than half the size of the bubble
+    // if (d < bubble.size / 2) {
+    //   //   // the bubble resets (starts from the bottom again )
+    //   bubble.x = random(width);
+    //   bubble.y = random(height, 500);
+    // }
   }
 }
 
@@ -172,10 +180,3 @@ function bubblePop() {
     bubble.display();
   }
 }
-
-// bubble's display
-// push();
-// fill(174, 226, 242);
-// noStroke();
-// ellipse(bubble.x, bubble.y, bubble.size);
-// pop();

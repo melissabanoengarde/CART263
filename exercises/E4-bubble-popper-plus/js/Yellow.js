@@ -1,3 +1,5 @@
+// Yellow, displays yellow bubbles and is a subclass that extends from Bubble.js
+
 class Yellow extends Bubble {
   constructor(x, y, size) {
     super(x, y, size);
