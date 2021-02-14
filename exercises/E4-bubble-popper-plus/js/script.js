@@ -7,9 +7,13 @@ Melissa Banoen-Garde
 
 pop bubbbles by matching pin and bubble colour
 - adding multiple bubbles
+- loading screen
 
 
 ******************/
+
+// variable to store our current state (loading screen and/or game)
+let state = `loadingScreen`;
 
 // global video variable
 let video;
@@ -49,6 +53,7 @@ function setup() {
   handpose = ml5.handpose(video, {
     flipHorizontal: true
   }, function() {
+    state = `game`; // switches state to "game"
     console.log(`Model loaded.`)
   });
   // listens for predictions
@@ -62,7 +67,7 @@ function setup() {
   for (let i = 0; i < totalBubbles; i++) {
     // defining parameters of the bubbles
     let x = random(width);
-    let y = random(height, 500);
+    let y = random(height, 550);
     let size = random(10, 50);
     // creating a new object to call the Bubble.js class
     bubble = new Bubble(x, y, size);
@@ -72,9 +77,26 @@ function setup() {
 }
 
 
-// draw()
-// Description of draw()
+// if-statement that handles the state of the program
 function draw() {
+  if (state === `loadingScreen`) {
+    loadingScreen();
+  }
+  else if (state === `game`) {
+    game();
+  }
+}
+
+function loadingScreen() {
+  push();
+  textAlign(CENTER, CENTER);
+  fill(0,170,0);
+  textSize(20);
+  text(`Loading... 📍`, width/2,height/2);
+  pop();
+}
+
+function game() {
   background(45, 161, 62); // green
   pins();
   bubblePop();
@@ -108,13 +130,13 @@ function pins() {
 
     // check bubble popping
     // calculates the distance between the bubble and the pin
-    // let d = dist(tipX, tipY, bubble.x, bubble.y);
+    let d = dist(tipX, tipY, bubble.x, bubble.y);
     // // if the distance is less than half the size of the bubble
-    // if (d < bubble.size / 2) {
+    if (d < bubble.size / 2) {
     //   // the bubble resets (starts from the bottom again )
-    //   bubble.x = random(width);
-    //   bubble.y = height;
-    // }
+      bubble.x = random(width);
+      bubble.y = random(height,500);
+    }
   }
 }
 
