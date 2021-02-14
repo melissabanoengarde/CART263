@@ -22,7 +22,6 @@ class Bubble {
   // draws bubbles
   display() {
     push();
-    fill(174, 226, 242);
     noStroke();
     ellipse(this.x, this.y, this.size);
     pop();

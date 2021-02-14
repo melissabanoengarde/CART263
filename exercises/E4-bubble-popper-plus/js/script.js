@@ -26,15 +26,12 @@ let predictions = [];
 
 // bubbles array
 let bubbles = [];
-let totalBubbles = 10;
 // variable to store our bubble
 let bubble;
-
-// preload()
-// Description of preload
-function preload() {
-
-}
+let red;
+let green;
+let blue;
+let yellow;
 
 
 // setup()
@@ -64,15 +61,43 @@ function setup() {
   });
 
   // BUBBLE
-  for (let i = 0; i < totalBubbles; i++) {
+  // Red bubbles
+  for (let i = 0; i < 2; i++) {
     // defining parameters of the bubbles
     let x = random(width);
     let y = random(height, 550);
     let size = random(10, 50);
-    // creating a new object to call the Bubble.js class
-    bubble = new Bubble(x, y, size);
+    // creating a new object to call the Red.js class
+    red = new Red(x, y, size);
     // pushing new object in the "bubbles" array
-    bubbles.push(bubble);
+    bubbles.push(red);
+  }
+
+  // Green bubbles
+  for (let i = 0; i < 2; i++) {
+    let x = random(width);
+    let y = random(height, 550);
+    let size = random(10, 50);
+    green = new Green(x, y, size);
+    bubbles.push(green);
+  }
+
+  // Blue bubbles
+  for (let i = 0; i < 2; i++) {
+    let x = random(width);
+    let y = random(height, 550);
+    let size = random(10, 50);
+    blue = new Blue(x, y, size);
+    bubbles.push(blue);
+  }
+
+  // Yellow bubbles
+  for (let i = 0; i < 2; i++) {
+    let x = random(width);
+    let y = random(height, 550);
+    let size = random(10, 50);
+    yellow = new Yellow(x, y, size);
+    bubbles.push(yellow);
   }
 }
 
@@ -81,8 +106,7 @@ function setup() {
 function draw() {
   if (state === `loadingScreen`) {
     loadingScreen();
-  }
-  else if (state === `game`) {
+  } else if (state === `game`) {
     game();
   }
 }
@@ -90,9 +114,9 @@ function draw() {
 function loadingScreen() {
   push();
   textAlign(CENTER, CENTER);
-  fill(0,170,0);
+  fill(0, 170, 0);
   textSize(20);
-  text(`Loading... 📍`, width/2,height/2);
+  text(`Loading... 📍`, width / 2, height / 2);
   pop();
 }
 
@@ -133,15 +157,15 @@ function pins() {
     let d = dist(tipX, tipY, bubble.x, bubble.y);
     // // if the distance is less than half the size of the bubble
     if (d < bubble.size / 2) {
-    //   // the bubble resets (starts from the bottom again )
+      //   // the bubble resets (starts from the bottom again )
       bubble.x = random(width);
-      bubble.y = random(height,500);
+      bubble.y = random(height, 500);
     }
   }
 }
 
 function bubblePop() {
-  // calling the Bubble class object's methods
+  // calling the Bubble superclass object's methods
   for (let i = 0; i < bubbles.length; i++) {
     let bubble = bubbles[i];
     bubble.motion();
