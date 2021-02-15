@@ -6,7 +6,7 @@ E4: Bubbble Popper +
 Melissa Banoen-Garde
 
 pop bubbbles by matching pin and bubble colour
-- adding multiple bubbles
+- adding multiple bubbles & multiple pins
 - loading screen
 
 
@@ -34,6 +34,29 @@ let green;
 let blue;
 let yellow;
 
+// index finger
+let indexTipX = undefined;
+let indexTipY = undefined;
+let indexBaseX = undefined;
+let indexBaseY = undefined;
+
+// middle finger
+let middleTipX = undefined;
+let middleTipY = undefined;
+let middleBaseX = undefined;
+let middleBaseY = undefined;
+
+// ring finger
+let ringTipX = undefined;
+let ringTipY = undefined;
+let ringBaseX = undefined;
+let ringBaseY = undefined;
+
+// pinky
+let pinkyTipX = undefined;
+let pinkyTipY = undefined;
+let pinkyBaseX = undefined;
+let pinkyBaseY = undefined;
 
 /* Setup */
 // Creates the program's canvas & initializes all elements within the
@@ -151,95 +174,41 @@ function pins() {
   if (predictions.length > 0) {
     //INDEX FINGER
     // index finger tip's x and y value
-    let indexTipX = predictions[0].annotations.indexFinger[3][0];
-    let indexTipY = predictions[0].annotations.indexFinger[3][1];
+    indexTipX = predictions[0].annotations.indexFinger[3][0];
+    indexTipY = predictions[0].annotations.indexFinger[3][1];
 
     // index finger base's x and y value
-    let indexBaseX = predictions[0].annotations.indexFinger[0][0];
-    let indexBaseY = predictions[0].annotations.indexFinger[0][1];
+    indexBaseX = predictions[0].annotations.indexFinger[0][0];
+    indexBaseY = predictions[0].annotations.indexFinger[0][1];
 
     // MIDDLE FINGER
     // middle finger tip's x and y value
-    let middleTipX = predictions[0].annotations.middleFinger[3][0];
-    let middleTipY = predictions[0].annotations.middleFinger[3][1];
+    middleTipX = predictions[0].annotations.middleFinger[3][0];
+    middleTipY = predictions[0].annotations.middleFinger[3][1];
 
     // middle finger base's x and y value
-    let middleBaseX = predictions[0].annotations.middleFinger[0][0];
-    let middleBaseY = predictions[0].annotations.middleFinger[0][1];
+    middleBaseX = predictions[0].annotations.middleFinger[0][0];
+    middleBaseY = predictions[0].annotations.middleFinger[0][1];
 
     // RING FINGER
     // ring finger tip's x and y value
-    let ringTipX = predictions[0].annotations.ringFinger[3][0];
-    let ringTipY = predictions[0].annotations.ringFinger[3][1];
+    ringTipX = predictions[0].annotations.ringFinger[3][0];
+    ringTipY = predictions[0].annotations.ringFinger[3][1];
 
     // ring finger base's x and y value
-    let ringBaseX = predictions[0].annotations.ringFinger[0][0];
-    let ringBaseY = predictions[0].annotations.ringFinger[0][1];
+    ringBaseX = predictions[0].annotations.ringFinger[0][0];
+    ringBaseY = predictions[0].annotations.ringFinger[0][1];
 
     // PINKY
     // pinky finger tip's x and y value
-    let pinkyTipX = predictions[0].annotations.pinky[3][0];
-    let pinkyTipY = predictions[0].annotations.pinky[3][1];
+    pinkyTipX = predictions[0].annotations.pinky[3][0];
+    pinkyTipY = predictions[0].annotations.pinky[3][1];
 
     // pinky finger base's x and y value
-    let pinkyBaseX = predictions[0].annotations.pinky[0][0];
-    let pinkyBaseY = predictions[0].annotations.pinky[0][1];
+    pinkyBaseX = predictions[0].annotations.pinky[0][0];
+    pinkyBaseY = predictions[0].annotations.pinky[0][1];
 
-    // INDEX FINGER: RED PIN
-    // body
-    push();
-    stroke(255);
-    line(indexTipX, indexTipY, indexBaseX, indexBaseY);
-    pop();
-
-    // head
-    push();
-    noStroke();
-    fill(255, 0, 0);
-    ellipse(indexBaseX, indexBaseY, PIN_SIZE);
-    pop();
-
-    // MIDDLE FINGER: GREEN PIN
-    // body
-    push();
-    stroke(255);
-    line(middleTipX, middleTipY, middleBaseX, middleBaseY);
-    pop();
-
-    // head
-    push();
-    noStroke();
-    fill(0, 255, 0);
-    ellipse(middleBaseX, middleBaseY, PIN_SIZE);
-    pop();
-
-    // RING FINGER: BLUE PIN
-    // body
-    push();
-    stroke(255);
-    line(ringTipX, ringTipY, ringBaseX, ringBaseY);
-    pop();
-
-    // head
-    push();
-    noStroke();
-    fill(0, 0, 255);
-    ellipse(ringBaseX, ringBaseY, PIN_SIZE);
-    pop();
-
-    // PINKY FINGER: YELLOW PIN
-    // body
-    push();
-    stroke(255);
-    line(pinkyTipX, pinkyTipY, pinkyBaseX, pinkyBaseY);
-    pop();
-
-    // head
-    push();
-    noStroke();
-    fill(255, 255, 0);
-    ellipse(pinkyBaseX, pinkyBaseY, PIN_SIZE);
-    pop();
+    drawPins();
 
     // check bubble popping
     // calculates the distance between the bubble and the pin
@@ -251,6 +220,64 @@ function pins() {
     //   bubble.y = random(height, 500);
     // }
   }
+}
+
+function drawPins() {
+  // INDEX FINGER: RED PIN
+  // body
+  push();
+  stroke(255);
+  line(indexTipX, indexTipY, indexBaseX, indexBaseY);
+  pop();
+
+  // head
+  push();
+  noStroke();
+  fill(255, 0, 0);
+  ellipse(indexBaseX, indexBaseY, PIN_SIZE);
+  pop();
+
+  // MIDDLE FINGER: GREEN PIN
+  // body
+  push();
+  stroke(255);
+  line(middleTipX, middleTipY, middleBaseX, middleBaseY);
+  pop();
+
+  // head
+  push();
+  noStroke();
+  fill(0, 255, 0);
+  ellipse(middleBaseX, middleBaseY, PIN_SIZE);
+  pop();
+
+  // RING FINGER: BLUE PIN
+  // body
+  push();
+  stroke(255);
+  line(ringTipX, ringTipY, ringBaseX, ringBaseY);
+  pop();
+
+  // head
+  push();
+  noStroke();
+  fill(0, 0, 255);
+  ellipse(ringBaseX, ringBaseY, PIN_SIZE);
+  pop();
+
+  // PINKY FINGER: YELLOW PIN
+  // body
+  push();
+  stroke(255);
+  line(pinkyTipX, pinkyTipY, pinkyBaseX, pinkyBaseY);
+  pop();
+
+  // head
+  push();
+  noStroke();
+  fill(255, 255, 0);
+  ellipse(pinkyBaseX, pinkyBaseY, PIN_SIZE);
+  pop();
 }
 
 /* bubblePop */
