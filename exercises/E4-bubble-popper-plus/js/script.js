@@ -23,6 +23,7 @@ let handpose = undefined;
 
 // global predictions variable
 let predictions = [];
+const PIN_SIZE = 20;
 
 // bubbles array
 let bubbles = [];
@@ -34,8 +35,9 @@ let blue;
 let yellow;
 
 
-// setup()
-// Description of setup
+/* Setup */
+// Creates the program's canvas & initializes all elements within the
+// program: webcam, ml5's handpose library, and our bubbles.
 function setup() {
   createCanvas(640, 480);
   initializeWebcam();
@@ -43,32 +45,34 @@ function setup() {
   initializeBubbles();
 }
 
-// WEBCAM
+/* WEBCAM */
+// Initializes user's webcam
 function initializeWebcam() {
   // accesses the webcam
   video = createCapture(VIDEO);
-  // hides video element so it doesn't display on the page
+  // hides video element and just shows the canvas
   video.hide();
 }
 
-// HANDPOSE
+/* HANDPOSE */
+// Creates a new handpose method. When the model is loaded, the program's state
+// switches to the "game" state and listens to new "predict" events
 function initializeHandpose() {
-  // handpose = ml5.handpose(?video, ?options, ?callback);
-  handpose = ml5.handpose(video, {
+  handpose = ml5.handpose(video, { // handpose = ml5.handpose(?video, ?options, ?callback);
     flipHorizontal: true
   }, function() {
     state = `game`; // switches state to "game"
     console.log(`Model loaded.`)
   });
-  // listens for predictions
-  // keeps predictions array up to date with the latest result
+  // This sets up an event that fills the global variable "predictions"
+  // with an array every time new hand poses are detected
   handpose.on(`predict`, function(results) {
     console.log(results);
     predictions = results;
   });
 }
 
-// BUBBLES
+/* BUBBLES */
 function initializeBubbles() {
   // Red bubbles
   for (let i = 0; i < 2; i++) {
@@ -110,6 +114,7 @@ function initializeBubbles() {
   }
 }
 
+/* DRAW */
 // if-statement that handles the state of the program
 function draw() {
   if (state === `loadingScreen`) {
@@ -119,6 +124,9 @@ function draw() {
   }
 }
 
+/*  loadingScreen */
+// A state that displays a "loading" text for the user to wait while
+// the program's elements are loading
 function loadingScreen() {
   push();
   textAlign(CENTER, CENTER);
@@ -128,37 +136,56 @@ function loadingScreen() {
   pop();
 }
 
+/*  game */
+// Once all elements are loaded, the program switches to the interactive game
 function game() {
   background(45, 161, 62); // green
   pins();
-  bubblePop();
+  drawBubbles();
 }
 
+/* pins */
+//
 function pins() {
-  // checks if predictions aaray has anything in it (length)
+  // checks if predictions array has anything in it (length)
   if (predictions.length > 0) {
-    let hand = predictions[0]; // handpose only predicts a single hand
-    let index = hand.annotations.indexFinger;
-    let tip = index[3];
-    let base = index[0];
-    let tipX = tip[0];
-    let tipY = tip[1];
-    let baseX = base[0];
-    let baseY = base[1];
+    //INDEX FINGER
+    // index finger tip's x and y value
+    let indexTipX = predictions[0].annotations.indexFinger[3][0];
+    let indexTipY = predictions[0].annotations.indexFinger[3][1];
 
-    // drawing the pin
-    // pin body
-    push();
-    stroke(255);
-    line(baseX, baseY, tipX, tipY);
-    pop();
+    // index finger base's x and y value
+    let indexBaseX = predictions[0].annotations.indexFinger[0][0];
+    let indexBaseY = predictions[0].annotations.indexFinger[0][1];
 
-    // pin head
-    push();
-    noStroke();
-    fill(255, 0, 0);
-    ellipse(baseX, baseY, 20);
-    pop();
+    // MIDDLE FINGER
+    // middle finger tip's x and y value
+    let middleTipX = predictions[0].annotations.middleFinger[3][0];
+    let middleTipY = predictions[0].annotations.middleFinger[3][1];
+
+    // middle finger base's x and y value
+    let middleBaseX = predictions[0].annotations.middleFinger[0][0];
+    let middleBaseY = predictions[0].annotations.middleFinger[0][1];
+
+    // RING FINGER
+    // ring finger tip's x and y value
+    let ringTipX = predictions[0].annotations.ringFinger[3][0];
+    let ringTipY = predictions[0].annotations.ringFinger[3][1];
+
+    // ring finger base's x and y value
+    let ringeBaseX = predictions[0].annotations.ringFinger[0][0];
+    let ringBaseY = predictions[0].annotations.ringFinger[0][1];
+
+    // PINKY
+    // pinky finger tip's x and y value
+    let pinkyTipX = predictions[0].annotations.pinky[3][0];
+    let pinkyTipY = predictions[0].annotations.pinky[3][1];
+
+    // pinky finger base's x and y value
+    let pinkyBaseX = predictions[0].annotations.pinky[0][0];
+    let pinkyBaseY = predictions[0].annotations.pinky[0][1];
+
+    drawPins();
 
     // check bubble popping
     // calculates the distance between the bubble and the pin
@@ -172,7 +199,68 @@ function pins() {
   }
 }
 
-function bubblePop() {
+// Draws the pins
+function drawPins() {
+  // INDEX FINGER: RED PIN
+  // body
+  push();
+  stroke(255);
+  line(indexTipX, indexTipY, indexBaseX, indexBaseY);
+  pop();
+
+  // head
+  push();
+  noStroke();
+  fill(255, 0, 0);
+  ellipse(indexBaseX, indexBaseY, PIN_SIZE);
+  pop();
+
+  // MIDDLE FINGER: GREEN PIN
+  // body
+  push();
+  stroke(255);
+  line(middleTipX, middleTipY, middleBaseX, middleBaseY);
+  pop();
+
+  // head
+  push();
+  noStroke();
+  fill(0, 255, 0);
+  ellipse(middleBaseX, middleBaseY, PIN_SIZE);
+  pop();
+
+  // RING FINGER: BLUE PIN
+  // body
+  push();
+  stroke(255);
+  line(ringTipX, ringTipY, ringBaseX, ringBaseY);
+  pop();
+
+  // head
+  push();
+  noStroke();
+  fill(0, 0, 255);
+  ellipse(ringBaseX, ringBaseY, PIN_SIZE);
+  pop();
+
+  // PINKY FINGER: YELLOW PIN
+  // body
+  push();
+  stroke(255);
+  line(pinkyTipX, pinkyTipY, pinkyBaseX, pinkyBaseY);
+  pop();
+
+  // head
+  push();
+  noStroke();
+  fill(255, 255, 0);
+  ellipse(pinkyBaseX, pinkyBaseY, PIN_SIZE);
+  pop();
+}
+
+/* bubblePop */
+//
+function drawBubbles() {
   // calling the Bubble superclass object's methods
   for (let i = 0; i < bubbles.length; i++) {
     let bubble = bubbles[i];
