@@ -185,7 +185,6 @@ function pins() {
     let pinkyBaseX = predictions[0].annotations.pinky[0][0];
     let pinkyBaseY = predictions[0].annotations.pinky[0][1];
 
-    // drawPins();
     // INDEX FINGER: RED PIN
     // body
     push();
@@ -253,67 +252,6 @@ function pins() {
     // }
   }
 }
-
-/*
-// Draws the pins
-function drawPins() {
-  // INDEX FINGER: RED PIN
-  // body
-  push();
-  stroke(255);
-  line(indexTipX, indexTipY, indexBaseX, indexBaseY);
-  pop();
-
-  // head
-  push();
-  noStroke();
-  fill(255, 0, 0);
-  ellipse(indexBaseX, indexBaseY, PIN_SIZE);
-  pop();
-
-  // MIDDLE FINGER: GREEN PIN
-  // body
-  push();
-  stroke(255);
-  line(middleTipX, middleTipY, middleBaseX, middleBaseY);
-  pop();
-
-  // head
-  push();
-  noStroke();
-  fill(0, 255, 0);
-  ellipse(middleBaseX, middleBaseY, PIN_SIZE);
-  pop();
-
-  // RING FINGER: BLUE PIN
-  // body
-  push();
-  stroke(255);
-  line(ringTipX, ringTipY, ringBaseX, ringBaseY);
-  pop();
-
-  // head
-  push();
-  noStroke();
-  fill(0, 0, 255);
-  ellipse(ringBaseX, ringBaseY, PIN_SIZE);
-  pop();
-
-  // PINKY FINGER: YELLOW PIN
-  // body
-  push();
-  stroke(255);
-  line(pinkyTipX, pinkyTipY, pinkyBaseX, pinkyBaseY);
-  pop();
-
-  // head
-  push();
-  noStroke();
-  fill(255, 255, 0);
-  ellipse(pinkyBaseX, pinkyBaseY, PIN_SIZE);
-  pop();
-}
-*/
 
 /* bubblePop */
 //
