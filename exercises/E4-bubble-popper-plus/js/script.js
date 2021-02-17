@@ -102,7 +102,7 @@ function initializeBubbles() {
     // defining parameters of the bubbles
     let x = random(width);
     let y = random(height, 550);
-    let size = random(10, 50);
+    let size = random(30, 70);
     // creating a new object to call the Red.js class
     red = new Red(x, y, size);
     // pushing new object in the "bubbles" array
@@ -135,6 +135,9 @@ function initializeBubbles() {
     yellow = new Yellow(x, y, size);
     bubbles.push(yellow);
   }
+
+  // console.log(bubbles);
+
 }
 
 /* DRAW */
@@ -210,15 +213,11 @@ function pins() {
 
     drawPins();
 
-    // check bubble popping
-    // calculates the distance between the bubble and the pin
-    // let d = dist(tipX, tipY, bubble.x, bubble.y);
-    // // // if the distance is less than half the size of the bubble
-    // if (d < bubble.size / 2) {
-    //   //   // the bubble resets (starts from the bottom again )
-    //   bubble.x = random(width);
-    //   bubble.y = random(height, 500);
-    // }
+    for (let i = 0; i < bubbles.length; i++) {
+      bubbles[i].popped();
+      console.log(bubbles[i].popped);
+    }
+
   }
 }
 
