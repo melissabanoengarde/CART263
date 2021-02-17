@@ -8,7 +8,7 @@ Melissa Banoen-Garde
 pop bubbbles by matching a pin and bubble colour!
 - added multiple bubbles of colours red, green, blue, and yellow
 - added multiple pins (a pin per finger)
-- loading screen
+- added a loading screen
 
 ******************/
 
