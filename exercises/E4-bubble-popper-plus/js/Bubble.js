@@ -33,7 +33,6 @@ class Bubble {
       yellow.x = random(width);
       yellow.y = random(height, 500);
     }
-
   }
 
   // bubbles' movement: bubbles rise from the bottom of the canvas

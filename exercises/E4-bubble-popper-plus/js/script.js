@@ -178,14 +178,14 @@ function pins() {
   if (predictions.length > 0) {
 
     pinCoordinates();
-    drawPins();
 
     // Calls the Bubble.js' "popped()" method which checks if a pin intersects with its respective
     // bubble colour. If it does, it *pops*
     for (let i = 0; i < bubbles.length; i++) {
       bubbles[i].popped();
-      console.log(bubbles[i].popped);
+      // console.log(bubbles[i].popped);
     }
+    drawPins();
   }
 }
 
