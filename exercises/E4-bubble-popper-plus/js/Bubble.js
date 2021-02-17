@@ -5,7 +5,6 @@ class Bubble {
     this.size = size;
     this.vx = 0;
     this.vy = -2; // for element to rise
-    this.active = true;
   }
 
   // check bubble popping
@@ -17,18 +16,24 @@ class Bubble {
     let dYellow = dist(pinkyTipX, pinkyTipY, yellow.x, yellow.y);
 
     // if the distance is less than half the size of the bubble
-    if (dRed < red.size / 2 || dGreen < green.size / 2 ||
-        dBlue < blue.size / 2 || dYellow < yellow.size / 2) {
+    if (dRed < red.size / 2) {
       // the bubble resets (starts from the bottom again )
       red.x = random(width);
       red.y = random(height, 500);
+    }
+    else if (dGreen < green.size / 2) {
       green.x = random(width);
       green.y = random(height, 500);
+    }
+    else if (dBlue < blue.size / 2) {
       blue.x = random(width);
       blue.y = random(height, 500);
+    }
+    else if (dYellow < yellow.size/2) {
       yellow.x = random(width);
       yellow.y = random(height, 500);
     }
+
   }
 
   // bubbles' movement: bubbles rise from the bottom of the canvas
@@ -45,17 +50,8 @@ class Bubble {
   // draws bubbles
   display() {
     push();
-    noStroke();
+    strokeWeight(2);
     ellipse(this.x, this.y, this.size);
     pop();
   }
-
-  // popped() {
-  //   if (this.active) {
-  //     fill(255,100,77);
-  //     noStroke();
-  //     ellipse(this.x, this.y, this.size);
-  //   }
-  // }
-
 }
