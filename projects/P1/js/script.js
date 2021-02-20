@@ -26,7 +26,7 @@ function preload() {
 function setup() {
   createCanvas(1200, 800);
 
-  currentState = new Intro();
+  currentState = new Field();
 }
 
 
