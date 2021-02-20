@@ -3,13 +3,17 @@ class Phase1 extends State {
   constructor() {
     super();
     // sets the canvas into a 3-dimensional one
-    createCanvas(1200, 800, WEBGL);
+    // this.canvas = createCanvas(1200, 800, WEBGL);
+
+    // this.canvas3D = new p5(script);
+
 
     this.description = `3D entrance scene`;
   }
 
   draw() {
     super.draw();
+
     background('black');
 
     // class the display method

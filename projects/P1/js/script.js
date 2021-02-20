@@ -11,6 +11,9 @@ let currentState;
 // custom font
 let ibmMono;
 
+// let canvas3D = new p5(script);
+
+
 // preload()
 // preloads the program's custom font
 function preload() {
@@ -24,7 +27,6 @@ function setup() {
   createCanvas(1200, 800);
 
   currentState = new Intro();
-
 }
 
 
