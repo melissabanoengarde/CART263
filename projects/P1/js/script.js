@@ -8,17 +8,20 @@ Melissa Banoen-Garde
 // global variable to store the current state
 let currentState;
 
-// preload()
-// Description of preload
-function preload() {
+// custom font
+let ibmMono;
 
+// preload()
+// preloads the program's custom font
+function preload() {
+  ibmMono = loadFont('assets/fonts/IBMPlexMono-Medium.otf');
 }
 
 
 // setup()
 // sets the first state which is the intro
 function setup() {
-  createCanvas(800, 600);
+  createCanvas(1200, 800);
 
   currentState = new Intro();
 

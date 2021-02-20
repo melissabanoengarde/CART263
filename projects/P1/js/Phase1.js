@@ -3,7 +3,9 @@ class Phase1 extends State {
   constructor() {
     super();
     // sets the canvas into a 3-dimensional one
-    createCanvas(800, 600, WEBGL);
+    createCanvas(1200, 800, WEBGL);
+
+    this.description = `3D entrance scene`;
   }
 
   draw() {
@@ -12,6 +14,7 @@ class Phase1 extends State {
 
     // class the display method
     this.display3D();
+    this.displayText();
   }
 
   display3D() {
@@ -22,5 +25,23 @@ class Phase1 extends State {
     rotateY(frameCount * 0.005);
     sphere(200);
     pop();
+  }
+
+  displayText() {
+    push();
+    textFont(ibmMono);
+    fill(255);
+    textAlign(CENTER, CENTER);
+    text(this.description, 0,0);
+    pop();
+  }
+
+  keyPressed() {
+    super.keyPressed();
+
+    // press the spacebar to switch to the maze state
+    if (keyCode === 32) {
+      currentState = new Field();
+    }
   }
 }
