@@ -7,7 +7,7 @@ class Intro extends State {
 
   draw() {
     super.draw();
-    background(200);
+    background(0);
 
     // calls the display method
     this.display();
@@ -15,8 +15,9 @@ class Intro extends State {
 
   display() {
     push();
-    fill(0);
-    textSize(55);
+    fill(0, 47, 163);
+    textFont(ibmMono);
+    textSize(25);
     textAlign(CENTER, CENTER);
     text(this.textString, width/2, height/2);
     pop();

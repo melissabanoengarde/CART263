@@ -11,12 +11,12 @@ class Field extends State {
       [0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0],
       [0, 1, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0],
       [0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0],
-      [0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 1, 0, 1, 0],
+      [0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 1, 0, 1, 0],
       [0, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 0],
       [0, 1, 1, 1, 1, 2, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 1, 0, 1, 0, 1, 0],
-      [0, 1, 0, 0, 0, 0, 0, 1, 1, 1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 1, 1, 0],
+      [0, 1, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 1, 1, 0, 1, 0, 1, 1, 1, 0],
       [0, 1, 0, 1, 1, 1, 0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0],
-      [0, 1, 0, 1, 0, 1, 1, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 3, 3, 0],
+      [0, 1, 0, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 3, 3, 0],
       [0, 1, 1, 1, 0, 0, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 3, 3, 0],
       [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     ];
@@ -78,21 +78,20 @@ class Field extends State {
     pop();
   }
 
-  // allows the user to move in the tile based maze 
+  // allows the user to move in the tile based maze
   keyPressed() {
     super.keyPressed();
-
-    if (keyCode === 65 && this.maze[this.user.y][this.user.x - 1] !== 0) {
-    this.user.x -= 1;
+    if (keyCode === 65 && this.maze[this.user.y][this.user.x + 1] !== 0) {
+    this.user.x += 1;
     }
-    else if (keyCode === 68 && this.maze[this.user.y][this.user.x + 1] !== 0) {
-      this.user.x += 1;
+    else if (keyCode === 68 && this.maze[this.user.y][this.user.x - 1] !== 0) {
+      this.user.x -= 1;
     }
-    else if (keyCode === 87 && this.maze[this.user.y - 1][this.user.x] !== 0) {
-      this.user.y -= 1;
-    }
-    else if (keyCode === 83 && this.maze[this.user.y + 1][this.user.x] !== 0) {
+    else if (keyCode === 87 && this.maze[this.user.y + 1][this.user.x] !== 0) {
       this.user.y += 1;
+    }
+    else if (keyCode === 83 && this.maze[this.user.y - 1][this.user.x] !== 0) {
+      this.user.y -= 1;
     }
   }
 
