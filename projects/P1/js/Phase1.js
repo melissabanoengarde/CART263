@@ -3,7 +3,7 @@ class Phase1 extends State {
   constructor() {
     super();
     // sets the canvas into a 3-dimensional one
-    // this.canvas = createCanvas(1200, 800, WEBGL);
+    // createCanvas(1200, 800, WEBGL);
 
     // this.canvas3D = new p5(script);
 
@@ -13,7 +13,7 @@ class Phase1 extends State {
 
   draw() {
     super.draw();
-
+    // createCanvas(1200,800,WEBGL);
     background('black');
 
     // class the display method
@@ -26,8 +26,8 @@ class Phase1 extends State {
     noFill();
     strokeWeight(0.5);
     stroke('green')
-    rotateY(frameCount * 0.005);
-    sphere(200);
+    // rotateY(frameCount * 0.005);
+    // sphere(200);
     pop();
   }
 
@@ -36,7 +36,8 @@ class Phase1 extends State {
     textFont(ibmMono);
     fill(255);
     textAlign(CENTER, CENTER);
-    text(this.description, 0,0);
+    text(this.description, width/2, height/2);
+    // text(this.description, 0,0);
     pop();
   }
 
