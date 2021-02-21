@@ -1,21 +1,20 @@
 class Field extends State {
   constructor() {
     super();
-    createCanvas(1199,762);
     // drawing the map of the maze field (22x14)
     // 0 = walls, 1 = trails, 2 = missions, 3 = barriers, 4 = target item
     this.maze = [
       [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-      [0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0],
-      [0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0],
+      [0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0],
+      [0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 2, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0],
       [0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0],
       [0, 1, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0],
-      [0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0],
+      [0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0],
       [0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 1, 0, 1, 0],
       [0, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 0],
       [0, 1, 1, 1, 1, 2, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 1, 0, 1, 0, 1, 0],
       [0, 1, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 1, 1, 0, 1, 0, 1, 1, 1, 0],
-      [0, 1, 0, 1, 1, 1, 0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0],
+      [0, 1, 0, 1, 1, 1, 0, 0, 0, 1, 0, 1, 0, 1, 2, 0, 1, 0, 0, 0, 0, 0],
       [0, 1, 0, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 4, 4, 0],
       [0, 1, 1, 1, 0, 0, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 3, 3, 3, 4, 4, 0],
       [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
@@ -33,11 +32,17 @@ class Field extends State {
 
   draw() {
     super.draw();
-    background(64, 74, 58, 10);
+    background(0, 10);
 
     this.displayMaze();
     this.showUserPosition();
-    this.checkMission();
+    this.checkMission(this.maze, this.maze[2], this.maze[10], this.maze[8], this.user.x, this.user.y);
+
+    // console.log(this.maze);
+    // console.log(`M1: ${this.maze[2]}`);
+    // console.log(`M2: ${this.maze[8]}`);
+    // console.log(`M3: ${this.maze[10]}`);
+
     this.checkItem();
   }
 
@@ -48,8 +53,8 @@ class Field extends State {
       // draws y for every x
       for (let x = 0; x < this.row.length; x++) {
         this.tile = this.row[x];
-        push();
 
+        push();
         // walls
         if (this.tile === 0) {
           fill(64, 74, 58);
@@ -84,23 +89,31 @@ class Field extends State {
     fill(0, 47, 163);
     rect(this.user.x * this.tileSize, this.user.y * this.tileSize, this.tileSize, this.tileSize,50);
     pop();
+    console.log(`User's position [x: ${this.user.x}, y: ${this.user.y}]`);
   }
 
-  checkMission() {
-    if (this.maze[this.user.y][this.user.x] === 2) {
-      // fill(255,0,0);
-      // rect(width/2, height/2, 300);
-
-    console.log(`${this.maze.length} elements`);
-    console.log(this.maze[12][17]);
-    // console.log("Mission");
+  // checkMission
+  // Handles missions' states. Specific sub-missions are prompted depending on
+  // the tile that is occupied AND the user's x and y position.
+  checkMission(maze, mission1, mission2, mission3, xPos, yPos) {
+    // MISSION 1
+    if (maze[yPos][xPos] === mission1[11] && xPos === 11 && yPos === 2) {
+      currentState = new Mission1();
     }
+    // MISSION 2
+    else if (maze[yPos][xPos] === mission2[14] && xPos === 5 && yPos === 8) {
+      currentState = new Mission2();
+    }
+    // MISSION 3
+    else if (maze[yPos][xPos] === mission3[5] && xPos === 14 && yPos === 10) {
+      currentState = new Mission3();
+    }
+    // console.log(`Brick 2: ${mission2[14]}`);
+    // console.log(`Brick 3: ${mission3[5]}`);
   }
 
   checkItem() {
     if (this.maze[this.user.y][this.user.x] === 3) {
-      fill(0,255,0);
-      rect(width/2, height/2, 300);
       console.log("Target Item");
     }
   }
