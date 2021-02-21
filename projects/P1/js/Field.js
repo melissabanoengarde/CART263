@@ -78,9 +78,6 @@ class Field extends State {
         pop();
       }
     }
-    // if (this.bricksActive.b1 === false) {
-    //   this.tile === 2;
-    // }
   }
 
   // draw's the user's position in the maze. is represented as a blue circle.
