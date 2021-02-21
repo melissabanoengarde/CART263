@@ -1,35 +1,52 @@
 class Intro extends State {
+  // constructor() acts as a setup()
   constructor() {
     super();
+    // sets the canvas into a 3-dimensional one
+    // createCanvas(1200, 800, WEBGL);
 
-    this.textString = `DUMMY TITLE:\n PRESS THE SPACEBAR`;
+    // this.canvas3D = new p5(script);
+
+
+    this.description = `3D entrance scene`;
   }
 
   draw() {
     super.draw();
-    background(0);
+    // createCanvas(1200,800,WEBGL);
+    background('black');
 
-    // calls the display method
-    this.display();
+    // class the display method
+    this.display3D();
+    this.displayText();
   }
 
-  display() {
+  display3D() {
     push();
-    fill(0, 47, 163);
+    noFill();
+    strokeWeight(0.5);
+    stroke('green')
+    // rotateY(frameCount * 0.005);
+    // sphere(200);
+    pop();
+  }
+
+  displayText() {
+    push();
     textFont(ibmMono);
-    textSize(25);
+    fill(255);
     textAlign(CENTER, CENTER);
-    text(this.textString, width/2, height/2);
+    text(this.description, width/2, height/2);
+    // text(this.description, 0,0);
     pop();
   }
 
   keyPressed() {
     super.keyPressed();
 
-    // press the spacebar to switch to the phase1 state
+    // press the spacebar to switch to the maze state
     if (keyCode === 32) {
-      currentState = new Phase1();
+      currentState = new Field();
     }
-
   }
 }

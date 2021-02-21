@@ -5,30 +5,31 @@ Project 1
 Melissa Banoen-Garde
 ******************/
 
-// global variable to store the current state
+// Global variable to store the current state
 let currentState;
 
 // custom font
 let ibmMono;
 
-// let canvas3D = new p5(script);
+// Global variable for the user's webcam and Handpose object
+let video = undefined;
+let handpose = undefined;
 
 
 // preload()
-// preloads the program's custom font
+// loads the IBM Plex Mono typeface
 function preload() {
   ibmMono = loadFont('assets/fonts/IBMPlexMono-Medium.otf');
 }
-
 
 // setup()
 // sets the first state which is the intro
 function setup() {
   createCanvas(1200, 800);
 
-  currentState = new Field();
-}
+  currentState = new Title();
 
+}
 
 // draw()
 // draws the methods inside the current state

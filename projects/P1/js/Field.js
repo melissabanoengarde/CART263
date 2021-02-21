@@ -1,6 +1,6 @@
 class Field extends State {
-  constructor() {
-    super();
+  constructor(video, handpose) {
+    super(video, handpose);
     // drawing the map of the maze field (22x14)
     // 0 = walls, 1 = trails, 2 = missions, 3 = barriers, 4 = target item
     this.maze = [
@@ -30,6 +30,16 @@ class Field extends State {
       x: 1,
       y: 1
     };
+
+    // Webcam and Handpose object
+    this.video = video;
+    this.handpose = handpose;
+
+    // this.brickActive = {
+    //   b1: false,
+    //   b2: false,
+    //   b3: false
+    // };
 
     console.log(`Brick in Field.js: ${this.maze[12][16]}`); // brick1
   };
