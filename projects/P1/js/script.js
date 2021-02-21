@@ -4,7 +4,7 @@
 Project 1
 Melissa Banoen-Garde
 ******************/
-
+let brick;
 // global variable to store the current state
 let currentState;
 

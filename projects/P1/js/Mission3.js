@@ -1,4 +1,4 @@
-class Mission3 extends State {
+class Mission3 extends Field {
   constructor() {
     super();
 

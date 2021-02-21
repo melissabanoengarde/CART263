@@ -20,14 +20,18 @@ class Field extends State {
       [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     ];
     this.tileSize = 54.5;
+
     // this.row and this.tile are defined in the displayMaze() method
     this.row = undefined;
     this.tile = undefined;
+
     // user's position
     this.user = {
       x: 1,
       y: 1
     };
+
+    console.log(`Brick in Field.js: ${this.maze[12][16]}`); // brick1
   };
 
   draw() {
@@ -35,14 +39,8 @@ class Field extends State {
     background(0, 10);
 
     this.displayMaze();
-    this.showUserPosition();
+    this.userPosition();
     this.checkMission(this.maze, this.maze[2], this.maze[10], this.maze[8], this.user.x, this.user.y);
-
-    // console.log(this.maze);
-    // console.log(`M1: ${this.maze[2]}`);
-    // console.log(`M2: ${this.maze[8]}`);
-    // console.log(`M3: ${this.maze[10]}`);
-
     this.checkItem();
   }
 
@@ -80,16 +78,19 @@ class Field extends State {
         pop();
       }
     }
+    // if (this.bricksActive.b1 === false) {
+    //   this.tile === 2;
+    // }
   }
 
   // draw's the user's position in the maze. is represented as a blue circle.
-  showUserPosition() {
+  userPosition() {
     push();
     noStroke();
     fill(0, 47, 163);
     rect(this.user.x * this.tileSize, this.user.y * this.tileSize, this.tileSize, this.tileSize,50);
     pop();
-    console.log(`User's position [x: ${this.user.x}, y: ${this.user.y}]`);
+    // console.log(`User's position [x: ${this.user.x}, y: ${this.user.y}]`);
   }
 
   // checkMission
@@ -108,8 +109,6 @@ class Field extends State {
     else if (maze[yPos][xPos] === mission3[5] && xPos === 14 && yPos === 10) {
       currentState = new Mission3();
     }
-    // console.log(`Brick 2: ${mission2[14]}`);
-    // console.log(`Brick 3: ${mission3[5]}`);
   }
 
   checkItem() {
@@ -141,3 +140,8 @@ class Field extends State {
   }
 
 }
+
+/*
+Notes:
+Brick1: this.maze[12][16];
+*/
